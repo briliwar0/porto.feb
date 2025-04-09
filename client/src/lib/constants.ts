@@ -4,22 +4,22 @@ import { Project, Skill, TimelineItem, SocialLink } from './types';
 export const SOCIAL_LINKS: SocialLink[] = [
   { 
     platform: 'GitHub', 
-    url: 'https://github.com/johndeveloper', 
+    url: 'https://github.com/febrideveloper', 
     icon: 'github' 
   },
   { 
     platform: 'LinkedIn', 
-    url: 'https://linkedin.com/in/johndeveloper', 
+    url: 'https://linkedin.com/in/febrideveloper', 
     icon: 'linkedin' 
   },
   { 
     platform: 'Twitter', 
-    url: 'https://twitter.com/johndeveloper', 
+    url: 'https://twitter.com/febrideveloper', 
     icon: 'twitter' 
   },
   { 
     platform: 'Dribbble', 
-    url: 'https://dribbble.com/johndeveloper', 
+    url: 'https://dribbble.com/febrideveloper', 
     icon: 'dribbble' 
   }
 ];
@@ -33,8 +33,8 @@ export const PROJECTS: Project[] = [
     image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80',
     category: 'web',
     technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    demoUrl: 'https://ecommerce-demo.johndeveloper.com',
-    codeUrl: 'https://github.com/johndeveloper/ecommerce-platform'
+    demoUrl: 'https://ecommerce-demo.febrideveloper.com',
+    codeUrl: 'https://github.com/febrideveloper/ecommerce-platform'
   },
   {
     id: 2,
@@ -43,8 +43,8 @@ export const PROJECTS: Project[] = [
     image: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1010&q=80',
     category: 'mobile',
     technologies: ['React Native', 'Firebase', 'Redux', 'Charts'],
-    demoUrl: 'https://fitness-app.johndeveloper.com',
-    codeUrl: 'https://github.com/johndeveloper/fitness-app'
+    demoUrl: 'https://fitness-app.febrideveloper.com',
+    codeUrl: 'https://github.com/febrideveloper/fitness-app'
   },
   {
     id: 3,
@@ -53,8 +53,8 @@ export const PROJECTS: Project[] = [
     image: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
     category: 'ui',
     technologies: ['Figma', 'CSS', 'Accessibility', 'D3.js'],
-    demoUrl: 'https://banking-ui.johndeveloper.com',
-    codeUrl: 'https://github.com/johndeveloper/banking-dashboard'
+    demoUrl: 'https://banking-ui.febrideveloper.com',
+    codeUrl: 'https://github.com/febrideveloper/banking-dashboard'
   },
   {
     id: 4,
@@ -63,8 +63,8 @@ export const PROJECTS: Project[] = [
     image: 'https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
     category: '3d',
     technologies: ['Three.js', 'WebGL', 'React', 'JavaScript'],
-    demoUrl: 'https://3d-configurator.johndeveloper.com',
-    codeUrl: 'https://github.com/johndeveloper/3d-configurator'
+    demoUrl: 'https://3d-configurator.febrideveloper.com',
+    codeUrl: 'https://github.com/febrideveloper/3d-configurator'
   },
   {
     id: 5,
@@ -73,8 +73,8 @@ export const PROJECTS: Project[] = [
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
     category: 'web',
     technologies: ['Vue.js', 'Node.js', 'PostgreSQL', 'Socket.io'],
-    demoUrl: 'https://project-manager.johndeveloper.com',
-    codeUrl: 'https://github.com/johndeveloper/project-manager'
+    demoUrl: 'https://project-manager.febrideveloper.com',
+    codeUrl: 'https://github.com/febrideveloper/project-manager'
   },
   {
     id: 6,
@@ -83,8 +83,8 @@ export const PROJECTS: Project[] = [
     image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
     category: 'mobile',
     technologies: ['Flutter', 'Firebase', 'Maps API', 'Dart'],
-    demoUrl: 'https://travel-app.johndeveloper.com',
-    codeUrl: 'https://github.com/johndeveloper/travel-companion'
+    demoUrl: 'https://travel-app.febrideveloper.com',
+    codeUrl: 'https://github.com/febrideveloper/travel-companion'
   }
 ];
 

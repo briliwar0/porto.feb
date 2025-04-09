@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 interface TypewriterOptions {
   words: string[];
@@ -19,40 +19,53 @@ export const useTypewriter = ({
   const [wordIndex, setWordIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const type = useCallback(() => {
-    const currentWord = words[wordIndex];
-    const shouldDelete = isDeleting;
-
-    setText((prev) => {
-      if (shouldDelete) {
-        return prev.substring(0, prev.length - 1);
-      } else {
-        return currentWord.substring(0, prev.length + 1);
-      }
-    });
-
-    if (!shouldDelete && text === currentWord) {
-      // Start deleting after delay
-      setTimeout(() => setIsDeleting(true), delayBetweenWords);
-    } else if (shouldDelete && text === '') {
-      setIsDeleting(false);
-      // Move to next word or loop back
-      setWordIndex((prev) => {
-        if (prev === words.length - 1) {
-          return loop ? 0 : prev;
-        }
-        return prev + 1;
-      });
-    }
-
-    const speed = isDeleting ? deleteSpeed : typeSpeed;
-    setTimeout(type, speed);
-  }, [delayBetweenWords, isDeleting, loop, text, typeSpeed, deleteSpeed, wordIndex, words]);
-
   useEffect(() => {
-    const timeout = setTimeout(type, 1000);
-    return () => clearTimeout(timeout);
-  }, [type]);
+    let timer: ReturnType<typeof setTimeout>;
+    
+    const handleTyping = () => {
+      const currentWord = words[wordIndex];
+      
+      if (isDeleting) {
+        // Deleting text
+        setText(current => current.substring(0, current.length - 1));
+        
+        // When fully deleted, move to next word
+        if (text === '') {
+          setIsDeleting(false);
+          setWordIndex((prev) => {
+            if (prev === words.length - 1) {
+              return loop ? 0 : prev;
+            }
+            return prev + 1;
+          });
+        }
+      } else {
+        // Typing text
+        setText(current => {
+          const nextText = currentWord.substring(0, current.length + 1);
+          return nextText;
+        });
+        
+        // When word is complete, prepare to delete after delay
+        if (text === currentWord) {
+          timer = setTimeout(() => {
+            setIsDeleting(true);
+          }, delayBetweenWords);
+          return;
+        }
+      }
+      
+      // Schedule next update
+      const speed = isDeleting ? deleteSpeed : typeSpeed;
+      timer = setTimeout(handleTyping, speed);
+    };
+
+    // Start the effect with a short delay
+    timer = setTimeout(handleTyping, 500);
+    
+    // Cleanup
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, wordIndex, words, loop, typeSpeed, deleteSpeed, delayBetweenWords]);
 
   return text;
 };

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useTypewriter } from '@/hooks/useTypewriter';
+import { useState, useEffect } from 'react';
 import { PERSONAL_INFO, TYPING_PHRASES, SOCIAL_LINKS } from '@/lib/constants';
 import { fadeIn, floatingAnimation } from '@/lib/animations';
 import { ChevronDownIcon } from 'lucide-react';
@@ -7,10 +7,46 @@ import { Button } from '@/components/ui/button';
 import febriProfilePic from '../assets/febri-profile.png';
 
 const HeroSection = () => {
-  const typewriterText = useTypewriter({
-    words: TYPING_PHRASES,
-    loop: true
-  });
+  // Implement our own typewriter effect
+  const [text, setText] = useState('');
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  useEffect(() => {
+    const currentWord = TYPING_PHRASES[currentWordIndex];
+    const typeSpeed = 100; // typing speed
+    const deleteSpeed = 50; // deleting speed
+    const delayBetweenWords = 2000; // delay before deleting
+    
+    let timer: NodeJS.Timeout;
+    
+    if (isDeleting) {
+      // Delete character
+      timer = setTimeout(() => {
+        setText(text.slice(0, -1));
+        if (text === '') {
+          setIsDeleting(false);
+          setCurrentWordIndex((prevIndex) => 
+            prevIndex === TYPING_PHRASES.length - 1 ? 0 : prevIndex + 1
+          );
+        }
+      }, deleteSpeed);
+    } else {
+      // Type character
+      if (text === currentWord) {
+        // Start deleting after delay
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, delayBetweenWords);
+      } else {
+        timer = setTimeout(() => {
+          setText(currentWord.slice(0, text.length + 1));
+        }, typeSpeed);
+      }
+    }
+    
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, currentWordIndex]);
 
   return (
     <section id="home" className="pt-40 pb-20 md:pb-32 md:pt-48 px-6 min-h-screen flex items-center relative overflow-hidden">
@@ -30,7 +66,7 @@ const HeroSection = () => {
               </span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-muted-foreground h-8">
-              <span>{typewriterText}</span>
+              <span>{text}</span>
               <motion.span 
                 className="inline-block w-0.5 h-6 bg-primary ml-1 align-middle"
                 animate={{ opacity: [0, 1, 0] }}
