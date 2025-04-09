@@ -8,6 +8,7 @@ import MarketplaceSection from '@/components/MarketplaceSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import Particles from '@/components/Particles';
+import WelcomeMessage from '@/components/WelcomeMessage';
 
 const Home = () => {
   useEffect(() => {
@@ -38,6 +39,9 @@ const Home = () => {
       <Particles />
       <Navbar />
       <main>
+        <div className="container mx-auto px-6 pt-24 pb-4">
+          <WelcomeMessage />
+        </div>
         <HeroSection />
         <AboutSection />
         <SkillsSection />
