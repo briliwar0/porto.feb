@@ -96,6 +96,13 @@ const Navbar = () => {
               Projects
             </a>
             <a 
+              href="#marketplace" 
+              className="font-medium hover:text-primary transition-colors"
+              onClick={handleLinkClick}
+            >
+              Marketplace
+            </a>
+            <a 
               href="#contact" 
               className="font-medium hover:text-primary transition-colors"
               onClick={handleLinkClick}
@@ -145,6 +152,13 @@ const Navbar = () => {
                 onClick={handleLinkClick}
               >
                 Projects
+              </a>
+              <a 
+                href="#marketplace" 
+                className="font-medium hover:text-primary transition-colors py-2"
+                onClick={handleLinkClick}
+              >
+                Marketplace
               </a>
               <a 
                 href="#contact" 
