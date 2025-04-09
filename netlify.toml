@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "./build.sh"
   publish = "dist"
   functions = "functions"
 
@@ -17,6 +17,7 @@
   from = "/*"
   to = "/index.html"
   status = 200
+  force = true
 
 [build.environment]
   NODE_VERSION = "18"

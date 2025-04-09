@@ -14,7 +14,7 @@ const Footer = () => {
           >
             <a href="#home" className="text-2xl font-bold font-sans">
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                John.dev
+                Febri.dev
               </span>
             </a>
             <p className="mt-2 text-muted-foreground">Crafting digital experiences that matter.</p>
@@ -26,7 +26,7 @@ const Footer = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <p className="text-muted-foreground mb-2">© {new Date().getFullYear()} John Developer. All rights reserved.</p>
+            <p className="text-muted-foreground mb-2">© {new Date().getFullYear()} Febri Developer. All rights reserved.</p>
             <div className="flex gap-4">
               {SOCIAL_LINKS.map((social) => (
                 <a 

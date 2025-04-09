@@ -46,7 +46,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <a href="#home" className="text-2xl font-bold font-sans">
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              John.dev
+              Febri.dev
             </span>
           </a>
           
