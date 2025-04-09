@@ -1,0 +1,148 @@
+10:38:02 AM: Waiting for other deploys from your team to complete. Check the queue: https://app.netlify.com/teams/briliwar0/builds
+10:38:17 AM: build-image version: 69179d37c92919bcf501ca9a8de95762ede3ffc5 (noble)
+10:38:17 AM: buildbot version: f0767d95f239f529580f009938af6c81a43d4281
+10:38:17 AM: Building without cache
+10:38:17 AM: Starting to prepare the repo for build
+10:38:17 AM: No cached dependencies found. Cloning fresh repo
+10:38:17 AM: git clone --filter=blob:none https://github.com/briliwar0/porto.feb
+10:38:17 AM: Preparing Git Reference refs/heads/main
+10:38:18 AM: Custom publish path detected. Proceeding with the specified path: 'dist'
+10:38:18 AM: Custom functions path detected. Proceeding with the specified path: 'functions'
+10:38:18 AM: Custom build command detected. Proceeding with the specified command: 'npm run build && mkdir -p functions-build && cp -r client/public/* dist/ && esbuild functions/server.js --platform=node --packages=external --bundle --outfile=functions/server.js'
+10:38:19 AM: Starting to install dependencies
+10:38:19 AM: Python version set to 3.13.2
+10:38:19 AM: Ruby version set to 2.7.2
+10:38:20 AM: mise go@1.19         install
+10:38:20 AM: mise go@1.19         download go1.19.linux-amd64.tar.gz
+10:38:21 AM: mise go@1.19         checksum go1.19.linux-amd64.tar.gz
+10:38:21 AM: mise go@1.19         extract go1.19.linux-amd64.tar.gz
+10:38:22 AM: mise go@1.19         go version
+10:38:22 AM: mise go@1.19         go version go1.19 linux/amd64
+10:38:22 AM: mise go@1.19       ✓ installed
+10:38:22 AM: Go version set to 1.19
+10:38:23 AM: Using PHP version 8.3
+10:38:25 AM: Downloading and installing node v18.20.8...
+10:38:25 AM: Downloading https://nodejs.org/dist/v18.20.8/node-v18.20.8-linux-x64.tar.xz...
+10:38:25 AM: Computing checksum with sha256sum
+10:38:25 AM: Checksums matched!
+10:38:27 AM: Now using node v18.20.8 (npm v10.8.2)
+10:38:27 AM: Enabling Node.js Corepack
+10:38:27 AM: Started restoring cached build plugins
+10:38:27 AM: Finished restoring cached build plugins
+10:38:27 AM: Started restoring cached corepack dependencies
+10:38:27 AM: Finished restoring cached corepack dependencies
+10:38:27 AM: No npm workspaces detected
+10:38:27 AM: Started restoring cached node modules
+10:38:27 AM: Finished restoring cached node modules
+10:38:27 AM: Installing npm packages using npm version 10.8.2
+10:38:30 AM: npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+10:38:30 AM: npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+10:38:34 AM: added 489 packages, and audited 490 packages in 6s
+10:38:34 AM: 61 packages are looking for funding
+10:38:34 AM:   run `npm fund` for details
+10:38:34 AM: 8 moderate severity vulnerabilities
+10:38:34 AM: To address issues that do not require attention, run:
+10:38:34 AM:   npm audit fix
+10:38:34 AM: To address all issues (including breaking changes), run:
+10:38:34 AM:   npm audit fix --force
+10:38:34 AM: Run `npm audit` for details.
+10:38:34 AM: npm packages installed
+10:38:34 AM: Successfully installed dependencies
+10:38:34 AM: Starting build script
+10:38:35 AM: Detected 1 framework(s)
+10:38:35 AM: "vite" at version "5.4.14"
+10:38:35 AM: Section completed: initializing
+10:38:36 AM: ​
+10:38:36 AM: Netlify Build                                                 
+10:38:36 AM: ────────────────────────────────────────────────────────────────
+10:38:36 AM: ​
+10:38:36 AM: ❯ Version
+10:38:36 AM:   @netlify/build 30.1.1
+10:38:36 AM: ​
+10:38:36 AM: ❯ Flags
+10:38:36 AM:   accountId: 67f5d0eb871ddcd34199a963
+10:38:36 AM:   baseRelDir: true
+10:38:36 AM:   buildId: 67f5dd8a871ddce9aa99aa26
+10:38:36 AM:   deployId: 67f5dd8a871ddce9aa99aa28
+10:38:36 AM: ​
+10:38:36 AM: ❯ Current directory
+10:38:36 AM:   /opt/build/repo
+10:38:36 AM: ​
+10:38:36 AM: ❯ Config file
+10:38:36 AM:   /opt/build/repo/netlify.toml
+10:38:36 AM: ​
+10:38:36 AM: ❯ Context
+10:38:36 AM:   production
+10:38:36 AM: ​
+10:38:36 AM: build.command from netlify.toml                               
+10:38:36 AM: ────────────────────────────────────────────────────────────────
+10:38:36 AM: ​
+10:38:36 AM: $ npm run build && mkdir -p functions-build && cp -r client/public/* dist/ && esbuild functions/server.js --platform=node --packages=external --bundle --outfile=functions/server.js
+10:38:36 AM: > rest-express@1.0.0 build
+10:38:36 AM: > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+10:38:37 AM: vite v5.4.14 building for production...
+10:38:37 AM: transforming...
+10:38:37 AM: Browserslist: browsers data (caniuse-lite) is 6 months old. Please run:
+10:38:37 AM:   npx update-browserslist-db@latest
+10:38:37 AM:   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+10:38:40 AM: ✓ 2141 modules transformed.
+10:38:40 AM: rendering chunks...
+10:38:40 AM: computing gzip size...
+10:38:40 AM: ../dist/public/index.html                             1.80 kB │ gzip:   0.70 kB
+10:38:40 AM: ../dist/public/assets/febri-profile-HFZCGPR-.png  1,083.32 kB
+10:38:40 AM: ../dist/public/assets/index-S2ZwQjao.css             64.03 kB │ gzip:  11.07 kB
+10:38:40 AM: ../dist/public/assets/index-DSnGE6JT.js             513.00 kB │ gzip: 158.14 kB
+10:38:40 AM: 
+10:38:40 AM: (!) Some chunks are larger than 500 kB after minification. Consider:
+10:38:40 AM: - Using dynamic import() to code-split the application
+10:38:40 AM: - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+10:38:40 AM: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+10:38:40 AM: ✓ built in 3.51s
+10:38:40 AM:   dist/index.js  8.3kb
+10:38:40 AM: ⚡ Done in 5ms
+10:38:40 AM: ▲ [WARNING] The CommonJS "exports" variable is treated as a global variable in an ECMAScript module and may not work as expected [commonjs-variable-in-esm]
+10:38:40 AM:     functions/server.js:45:0:
+10:38:40 AM:       45 │ exports.handler = serverless(app);
+10:38:40 AM:          ╵ ~~~~~~~
+10:38:40 AM:   This file is considered to be an ECMAScript module because the enclosing "package.json" file sets the type of this file to "module":
+10:38:40 AM:     package.json:4:10:
+10:38:40 AM:       4 │   "type": "module",
+10:38:40 AM:         ╵           ~~~~~~~~
+10:38:40 AM:   Node's package format requires that CommonJS files in a "type": "module" package use the ".cjs" file extension.
+10:38:40 AM: ✘ [ERROR] Refusing to overwrite input file "functions/server.js" (use "--allow-overwrite" to allow this)
+10:38:40 AM: 1 warning and 1 error
+10:38:40 AM:   functions/server.js  1.2kb
+10:38:40 AM: ⚡ Done in 3ms
+10:38:40 AM: ​
+10:38:40 AM: "build.command" failed                                        
+10:38:40 AM: ────────────────────────────────────────────────────────────────
+10:38:40 AM: ​
+10:38:40 AM:   Error message
+10:38:40 AM:   Command failed with exit code 1: npm run build && mkdir -p functions-build && cp -r client/public/* dist/ && esbuild functions/server.js --platform=node --packages=external --bundle --outfile=functions/server.js
+​
+  Error location
+  In build.command from netlify.toml:
+  npm run build && mkdir -p functions-build && cp -r client/public/* dist/ && esbuild functions/server.js --platform=node --packages=external --bundle --outfile=functions/server.js
+​
+  Resolved config (https://ntl.fyi/exit-code-1)
+10:38:40 AM:   build:
+10:38:41 AM:     command: npm run build && mkdir -p functions-build && cp -r client/public/* dist/ && esbuild functions/server.js --platform=node --packages=external --bundle --outfile=functions/server.js
+    commandOrigin: config
+    environment:
+      - NODE_VERSION
+    publish: /opt/build/repo/dist
+    publishOrigin: config
+  functionsDirectory: /opt/build/repo/functions
+  redirects:
+    - from: /api/*
+      status: 200
+      to: /.netlify/functions/server/:splat
+    - force: true
+      from: /*
+      status: 200
+      to: /index.html
+  redirectsOrigin: config
+10:38:41 AM: Build failed due to a user error: Build script returned non-zero exit code: 2
+10:38:41 AM: Failing build: Failed to build site
+10:38:41 AM: Finished processing build request in 24.365s
+10:38:41 AM: Failed during stage 'building site': Build script returned non-zero exit code: 2 (https://ntl.fyi/exit-code-2)

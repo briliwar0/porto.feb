@@ -1,9 +1,10 @@
-const express = require('express');
-const serverless = require('serverless-http');
-const { json } = require('body-parser');
-const cors = require('cors');
-const { Pool } = require('@neondatabase/serverless');
-const { drizzle } = require('drizzle-orm/neon-serverless');
+// @ts-nocheck
+import express from 'express';
+import serverless from 'serverless-http';
+import { json } from 'body-parser';
+import cors from 'cors';
+import { Pool } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-serverless';
 
 const app = express();
 app.use(cors());
@@ -42,4 +43,4 @@ app.get('/api/health', (req, res) => {
 });
 
 // Export the serverless function
-exports.handler = serverless(app);
+export const handler = serverless(app);
