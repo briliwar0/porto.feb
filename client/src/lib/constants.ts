@@ -198,21 +198,21 @@ export const TIMELINE_ITEMS: TimelineItem[] = [
     id: 2,
     title: 'Full-Stack Developer',
     organization: '@ WebSolutions Co.',
-    period: '2018 - 2021',
+    period: '2023 - 2025',
     description: 'Developed and optimized web applications for enterprise clients. Reduced load times by 45% through performance optimizations and modern coding practices.'
   },
   {
     id: 3,
     title: 'Front-End Developer',
     organization: '@ Creative Agency',
-    period: '2016 - 2018',
+    period: '2022 - 2023',
     description: 'Created responsive websites and interactive experiences for clients in various industries. Specialized in animations and micro-interactions.'
   },
   {
     id: 4,
     title: 'Computer Science Degree',
-    organization: '@ Tech University',
-    period: '2012 - 2016',
+    organization: '@ Ahmad Dahlan University',
+    period: '2021 - 2023',
     description: 'Bachelor\'s degree in Computer Science with focus on web technologies and user interface design. Graduated with honors.'
   }
 ];
