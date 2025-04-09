@@ -5,7 +5,7 @@ import SectionHeading from './ui/section-heading';
 import TimelineItem from './ui/timeline-item';
 import { DownloadIcon, UserIcon, PhoneIcon, MailIcon, MapPinIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import profileImage from '@assets/FEBRI FOR CV OR OTHER PP - Copycopy.png';
+import profileImage from '@assets/FEBRI FOR CV OR OTHER PP - Coppoiuytty50percent.png';
 
 const AboutSection = () => {
   return (
