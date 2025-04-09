@@ -219,7 +219,7 @@ export const TIMELINE_ITEMS: TimelineItem[] = [
 
 // Personal info
 export const PERSONAL_INFO = {
-  name: 'Febri Developer',
+  name: 'Muhammad Febrilian Tisna',
   title: 'Full Stack Developer & UI/UX Enthusiast',
   location: 'East Kalimantan, Indonesia',
   email: 'febriliantisna@gmail.com',
