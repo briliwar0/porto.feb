@@ -4,6 +4,7 @@ import { PERSONAL_INFO, TYPING_PHRASES, SOCIAL_LINKS } from '@/lib/constants';
 import { fadeIn, floatingAnimation } from '@/lib/animations';
 import { ChevronDownIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import febriProfilePic from '../assets/febri-profile.png';
 
 const HeroSection = () => {
   const typewriterText = useTypewriter({
@@ -85,8 +86,8 @@ const HeroSection = () => {
             <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full bg-gradient-to-br from-primary to-secondary p-1">
               <div className="absolute inset-1 rounded-full overflow-hidden bg-background">
                 <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3" 
-                  alt="John Developer" 
+                  src={febriProfilePic} 
+                  alt="Febri Developer" 
                   className="w-full h-full object-cover"
                 />
               </div>

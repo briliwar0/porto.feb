@@ -149,11 +149,11 @@ export const TIMELINE_ITEMS: TimelineItem[] = [
 
 // Personal info
 export const PERSONAL_INFO = {
-  name: 'John Developer',
+  name: 'Febri Developer',
   title: 'Full Stack Developer & UI/UX Enthusiast',
-  location: 'New York, USA',
-  email: 'john@developer.com',
-  phone: '+1 (555) 123-4567'
+  location: 'East Kalimantan, Indonesia',
+  email: 'febriliantisna@gmail.com',
+  phone: '+6281255697781'
 };
 
 // Typing effect phrases
