@@ -9,10 +9,9 @@ import { Link, useLocation } from "wouter";
 
 // Make sure to call `loadStripe` outside of a component's render to avoid
 // recreating the `Stripe` object on every render.
-if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
-  throw new Error('Missing required Stripe key: VITE_STRIPE_PUBLIC_KEY');
-}
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+// Temporarily use conditional to avoid error if key is not available
+const stripeKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY || '';
+const stripePromise = stripeKey ? loadStripe(stripeKey) : null;
 
 const CheckoutForm = ({ productId, price }: { productId: number, price: number }) => {
   const stripe = useStripe();
@@ -193,9 +192,21 @@ export default function Checkout() {
               </div>
             </div>
   
-            <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'night' } }}>
-              <CheckoutForm productId={productId} price={price} />
-            </Elements>
+            {stripePromise ? (
+              <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'night' } }}>
+                <CheckoutForm productId={productId} price={price} />
+              </Elements>
+            ) : (
+              <div className="p-4 text-center bg-yellow-500/10 border border-yellow-500/30 rounded-md">
+                <p className="text-yellow-500">Stripe payment is temporarily unavailable.</p>
+                <Button className="mt-4" asChild>
+                  <Link href="/">
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Return to Home
+                  </Link>
+                </Button>
+              </div>
+            )}
           </div>
         ) : null}
       </div>
