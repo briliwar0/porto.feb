@@ -11,3 +11,22 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
 }
+
+/* LinkedIn Badge styling */
+.linkedin-badge-container {
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 8px;
+  max-width: 300px;
+}
+
+.LI-profile-badge {
+  background-color: transparent !important;
+}
+
+/* Override any LinkedIn styles that don't match our dark theme */
+.LI-badge-container.dark {
+  background-color: transparent !important;
+  border: none !important;
+}

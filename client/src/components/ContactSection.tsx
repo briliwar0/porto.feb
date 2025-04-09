@@ -152,6 +152,31 @@ const ContactSection = () => {
                     </div>
                   </div>
                 </div>
+                
+                {/* LinkedIn Badge */}
+                <div className="mt-8">
+                  <h4 className="font-bold mb-3">LinkedIn Profile</h4>
+                  <div className="linkedin-badge-container">
+                    <div 
+                      className="badge-base LI-profile-badge" 
+                      data-locale="in_ID" 
+                      data-size="medium" 
+                      data-theme="dark" 
+                      data-type="VERTICAL" 
+                      data-vanity="muhammadfebriliantisna" 
+                      data-version="v1"
+                    >
+                      <a 
+                        className="badge-base__link LI-simple-link" 
+                        href="https://id.linkedin.com/in/muhammadfebriliantisna?trk=profile-badge"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Muhammad Febrilian Tisna
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
