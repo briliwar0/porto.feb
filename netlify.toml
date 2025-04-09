@@ -1,5 +1,5 @@
 [build]
-  command = "./build.sh"
+  command = "npm run build && mkdir -p functions-build && cp -r client/public/* dist/ && esbuild functions/server.js --platform=node --packages=external --bundle --outfile=functions/server.js"
   publish = "dist"
   functions = "functions"
 

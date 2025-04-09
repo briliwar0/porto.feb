@@ -1,0 +1,59 @@
+10:33:15 AM: Failed during stage 'building site': Build script returned non-zero exit code: 2 (https://ntl.fyi/exit-code-2)
+10:33:14 AM: Netlify Build                                                 
+10:33:14 AM: ────────────────────────────────────────────────────────────────
+10:33:14 AM: ​
+10:33:14 AM: ❯ Version
+10:33:14 AM:   @netlify/build 30.1.1
+10:33:14 AM: ​
+10:33:14 AM: ❯ Flags
+10:33:14 AM:   accountId: 67f5d0eb871ddcd34199a963
+10:33:14 AM:   baseRelDir: true
+10:33:14 AM:   buildId: 67f5dc4665c5b8000862ea45
+10:33:14 AM:   deployId: 67f5dc4665c5b8000862ea47
+10:33:15 AM: ​
+10:33:15 AM: ❯ Current directory
+10:33:15 AM:   /opt/build/repo
+10:33:15 AM: ​
+10:33:15 AM: ❯ Config file
+10:33:15 AM:   /opt/build/repo/netlify.toml
+10:33:15 AM: ​
+10:33:15 AM: ❯ Context
+10:33:15 AM:   production
+10:33:15 AM: ​
+10:33:15 AM: build.command from netlify.toml                               
+10:33:15 AM: ────────────────────────────────────────────────────────────────
+10:33:15 AM: ​
+10:33:15 AM: $ ./build.sh
+10:33:15 AM: bash: line 1: ./build.sh: Permission denied
+10:33:15 AM: ​
+10:33:15 AM: "build.command" failed                                        
+10:33:15 AM: ────────────────────────────────────────────────────────────────
+10:33:15 AM: ​
+10:33:15 AM:   Error message
+10:33:15 AM:   Command failed with exit code 126: ./build.sh (https://ntl.fyi/exit-code-126)
+10:33:15 AM: ​
+10:33:15 AM:   Error location
+10:33:15 AM:   In build.command from netlify.toml:
+10:33:15 AM:   ./build.sh
+10:33:15 AM: ​
+10:33:15 AM:   Resolved config
+10:33:15 AM:   build:
+10:33:15 AM:     command: ./build.sh
+10:33:15 AM:     commandOrigin: config
+10:33:15 AM:     environment:
+10:33:15 AM:       - NODE_VERSION
+10:33:15 AM:     publish: /opt/build/repo/dist
+10:33:15 AM:     publishOrigin: config
+10:33:15 AM:   functionsDirectory: /opt/build/repo/functions
+10:33:15 AM:   redirects:
+10:33:15 AM:     - from: /api/*
+      status: 200
+      to: /.netlify/functions/server/:splat
+    - force: true
+      from: /*
+      status: 200
+      to: /index.html
+  redirectsOrigin: config
+10:33:15 AM: Build failed due to a user error: Build script returned non-zero exit code: 2
+10:33:15 AM: Failing build: Failed to build site
+10:33:15 AM: Finished processing build request in 24.839s
