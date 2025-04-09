@@ -92,22 +92,23 @@ const HeroSection = () => {
                 </Button>
               </motion.div>
             </div>
-            <div className="flex mt-10 gap-6 justify-center lg:justify-start">
+            <div className="flex flex-wrap mt-10 gap-4 justify-center lg:justify-start max-w-md">
               {SOCIAL_LINKS.map((social, index) => (
                 <motion.a
                   key={social.platform}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-2xl hover:text-primary transition-colors"
-                  whileHover={{ scale: 1.2 }}
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 dark:bg-dark/20 backdrop-blur-sm hover:bg-primary hover:text-white shadow-sm transition-all"
+                  whileHover={{ scale: 1.15, y: -5 }}
                   whileTap={{ scale: 0.9 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index + 0.8 }}
+                  transition={{ delay: 0.05 * index + 0.5 }}
                   aria-label={social.platform}
+                  title={social.platform}
                 >
-                  <i className={`fab fa-${social.icon}`}></i>
+                  <i className={`fab fa-${social.icon} text-lg`}></i>
                 </motion.a>
               ))}
             </div>

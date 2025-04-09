@@ -13,14 +13,39 @@ export const SOCIAL_LINKS: SocialLink[] = [
     icon: 'linkedin' 
   },
   { 
-    platform: 'Twitter', 
-    url: 'https://twitter.com/febrideveloper', 
+    platform: 'X', 
+    url: 'https://x.com/febrideveloper', 
     icon: 'twitter' 
+  },
+  { 
+    platform: 'Instagram', 
+    url: 'https://instagram.com/febrideveloper', 
+    icon: 'instagram' 
+  },
+  { 
+    platform: 'YouTube', 
+    url: 'https://youtube.com/@febrideveloper', 
+    icon: 'youtube' 
+  },
+  { 
+    platform: 'TikTok', 
+    url: 'https://tiktok.com/@febrideveloper', 
+    icon: 'tiktok' 
   },
   { 
     platform: 'Dribbble', 
     url: 'https://dribbble.com/febrideveloper', 
     icon: 'dribbble' 
+  },
+  { 
+    platform: 'Behance', 
+    url: 'https://behance.net/febrideveloper', 
+    icon: 'behance' 
+  },
+  { 
+    platform: 'CodePen', 
+    url: 'https://codepen.io/febrideveloper', 
+    icon: 'codepen' 
   }
 ];
 
