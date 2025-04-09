@@ -177,7 +177,7 @@ const ContactSection = () => {
                           <FormLabel>Your Name</FormLabel>
                           <FormControl>
                             <Input 
-                              placeholder="Febri" 
+                              placeholder="name" 
                               className="bg-white/5 dark:bg-dark/30 border border-gray-300 dark:border-gray-700"
                               {...field} 
                             />
@@ -195,7 +195,7 @@ const ContactSection = () => {
                           <FormLabel>Your Email</FormLabel>
                           <FormControl>
                             <Input 
-                              placeholder="febri@example.com" 
+                              placeholder="name@example.com" 
                               type="email"
                               className="bg-white/5 dark:bg-dark/30 border border-gray-300 dark:border-gray-700"
                               {...field} 
