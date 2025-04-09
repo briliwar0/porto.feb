@@ -85,6 +85,66 @@ export const PROJECTS: Project[] = [
     technologies: ['Flutter', 'Firebase', 'Maps API', 'Dart'],
     demoUrl: 'https://travel-app.febrideveloper.com',
     codeUrl: 'https://github.com/febrideveloper/travel-companion'
+  },
+  {
+    id: 7,
+    title: 'AI Image Generator',
+    description: 'Web application that uses machine learning to generate unique images based on text prompts.',
+    image: 'https://images.unsplash.com/photo-1638803972694-7b1b52032286?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
+    category: 'web',
+    technologies: ['React', 'TensorFlow.js', 'WebGL', 'OpenAI API'],
+    demoUrl: 'https://ai-generator.febrideveloper.com',
+    codeUrl: 'https://github.com/febrideveloper/ai-image-generator'
+  },
+  {
+    id: 8,
+    title: 'Cryptocurrency Dashboard',
+    description: 'Real-time cryptocurrency tracking platform with portfolio management and market analysis tools.',
+    image: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80',
+    category: 'web',
+    technologies: ['Next.js', 'GraphQL', 'D3.js', 'CoinGecko API'],
+    demoUrl: 'https://crypto-dashboard.febrideveloper.com',
+    codeUrl: 'https://github.com/febrideveloper/crypto-dashboard'
+  },
+  {
+    id: 9,
+    title: 'Social Media Analytics',
+    description: 'Comprehensive analytics platform for social media managers with automated reporting and insights.',
+    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80',
+    category: 'web',
+    technologies: ['Angular', 'Django', 'PostgreSQL', 'Chart.js'],
+    demoUrl: 'https://social-analytics.febrideveloper.com',
+    codeUrl: 'https://github.com/febrideveloper/social-media-analytics'
+  },
+  {
+    id: 10,
+    title: 'VR Education Platform',
+    description: 'Virtual reality education platform that delivers immersive learning experiences across various subjects.',
+    image: 'https://images.unsplash.com/photo-1617802690992-15d93263d3a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
+    category: '3d',
+    technologies: ['Unity', 'WebXR', 'Three.js', 'A-Frame'],
+    demoUrl: 'https://vr-education.febrideveloper.com',
+    codeUrl: 'https://github.com/febrideveloper/vr-education'
+  },
+  {
+    id: 11,
+    title: 'Smart Home App',
+    description: 'Mobile application for controlling smart home devices with automation, schedules, and energy monitoring.',
+    image: 'https://images.unsplash.com/photo-1558002038-1055e2e28cd0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
+    category: 'mobile',
+    technologies: ['Swift', 'Kotlin', 'IoT', 'Bluetooth LE'],
+    demoUrl: 'https://smart-home.febrideveloper.com',
+    codeUrl: 'https://github.com/febrideveloper/smart-home-app'
+  },
+  {
+    id: 12,
+    title: 'Design System Library',
+    description: 'Comprehensive UI component library with design tokens, documentation, and integration examples.',
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80',
+    category: 'ui',
+    technologies: ['Storybook', 'React', 'Figma', 'CSS/SASS'],
+    demoUrl: 'https://design-system.febrideveloper.com',
+    codeUrl: 'https://github.com/febrideveloper/design-system'
   }
 ];
 
