@@ -4,7 +4,7 @@ import { Project, Skill, TimelineItem, SocialLink, MarketplaceItem } from './typ
 export const SOCIAL_LINKS: SocialLink[] = [
   { 
     platform: 'GitHub', 
-    url: 'https://github.com/febrideveloper', 
+    url: 'https://github.com/febriliantisna', 
     icon: 'github' 
   },
   { 
@@ -19,12 +19,12 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
   { 
     platform: 'Instagram', 
-    url: 'https://instagram.com/febrideveloper', 
+    url: 'https://www.instagram.com/fbrilntn', 
     icon: 'instagram' 
   },
   { 
     platform: 'YouTube', 
-    url: 'https://youtube.com/@febrideveloper', 
+    url: 'https://youtube.com/@febnas', 
     icon: 'youtube' 
   },
   { 
