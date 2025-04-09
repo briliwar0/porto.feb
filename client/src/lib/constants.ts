@@ -9,7 +9,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
   { 
     platform: 'LinkedIn', 
-    url: 'https://linkedin.com/in/febrideveloper', 
+    url: 'https://linkedin.com/in/muhammadfebriliantisna', 
     icon: 'linkedin' 
   },
   { 
