@@ -6,6 +6,7 @@ import { INSPIRATIONAL_QUOTES, Quote } from '@/lib/quotes';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Check, Edit2, RefreshCcw } from 'lucide-react';
+import LinuxLogo from './LinuxLogo';
 
 const WelcomeMessage = () => {
   const [greeting, setGreeting] = useState('');
@@ -148,20 +149,25 @@ const WelcomeMessage = () => {
       </div>
       
       <div className="mt-4 border-t border-gray-700/30 pt-4">
-        <div className="flex items-start justify-between">
-          <div className="quote-container">
-            <p className="text-sm italic text-muted-foreground">"{quote.text}"</p>
-            <p className="text-xs mt-1 text-right">— {quote.author}</p>
+        <div className="flex items-start gap-3">
+          <div className="flex-shrink-0 mt-1">
+            <LinuxLogo size={30} color="currentColor" className="opacity-80" />
           </div>
-          <Button 
-            variant="ghost" 
-            size="sm"
-            className="h-6 w-6 p-0 rounded-full bg-white/5 hover:bg-white/10 dark:bg-dark/30 dark:hover:bg-dark/50"
-            onClick={() => setQuote(getRandomQuote())}
-            title="Get new quote"
-          >
-            <RefreshCcw className="h-3 w-3" />
-          </Button>
+          <div className="flex-1 flex items-start justify-between">
+            <div className="quote-container">
+              <p className="text-sm italic text-muted-foreground">"{quote.text}"</p>
+              <p className="text-xs mt-1 text-right">— {quote.author}</p>
+            </div>
+            <Button 
+              variant="ghost" 
+              size="sm"
+              className="h-6 w-6 p-0 rounded-full bg-white/5 hover:bg-white/10 dark:bg-dark/30 dark:hover:bg-dark/50 ml-2 flex-shrink-0"
+              onClick={() => setQuote(getRandomQuote())}
+              title="Get new quote"
+            >
+              <RefreshCcw className="h-3 w-3" />
+            </Button>
+          </div>
         </div>
       </div>
     </motion.div>
