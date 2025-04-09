@@ -11,7 +11,7 @@ import Particles from '@/components/Particles';
 const Home = () => {
   useEffect(() => {
     // Set document title
-    document.title = 'John Developer | Portfolio';
+    document.title = 'Febri Developer | Portfolio';
     
     // Add font awesome CDN
     const fontAwesome = document.createElement('link');
