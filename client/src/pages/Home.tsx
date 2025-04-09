@@ -4,6 +4,7 @@ import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
 import ProjectsSection from '@/components/ProjectsSection';
+import MarketplaceSection from '@/components/MarketplaceSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import Particles from '@/components/Particles';
@@ -41,6 +42,7 @@ const Home = () => {
         <AboutSection />
         <SkillsSection />
         <ProjectsSection />
+        <MarketplaceSection />
         <ContactSection />
       </main>
       <Footer />

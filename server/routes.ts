@@ -4,6 +4,13 @@ import { storage } from "./storage";
 import { insertMessageSchema } from "@shared/schema";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
+import Stripe from "stripe";
+
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
+}
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form endpoint
@@ -39,7 +46,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get GitHub repositories - example of integrating with external APIs
   app.get("/api/github", async (req, res) => {
     try {
-      const username = req.query.username || 'johndeveloper';
+      const username = req.query.username || 'febrideveloper';
       const response = await fetch(`https://api.github.com/users/${username}/repos`);
       
       if (!response.ok) {
@@ -52,6 +59,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ 
         success: false, 
         message: error instanceof Error ? error.message : "Failed to fetch GitHub repositories" 
+      });
+    }
+  });
+
+  // Stripe payment intent endpoint
+  app.post("/api/create-payment-intent", async (req, res) => {
+    try {
+      const { amount, productId, productName } = req.body;
+      
+      if (!amount || !productId) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "Missing required parameters: amount and productId" 
+        });
+      }
+
+      // Create a new payment intent
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: Math.round(amount),
+        currency: "usd",
+        description: `Purchase of ${productName || 'Product #' + productId}`,
+        metadata: {
+          productId: productId.toString(),
+          productName: productName || 'Product #' + productId
+        }
+      });
+
+      // Return the client secret
+      res.json({ 
+        success: true,
+        clientSecret: paymentIntent.client_secret 
+      });
+    } catch (error: any) {
+      res.status(500).json({ 
+        success: false, 
+        message: "Error creating payment intent: " + error.message 
       });
     }
   });
