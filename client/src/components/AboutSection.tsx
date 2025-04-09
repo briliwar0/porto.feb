@@ -5,6 +5,7 @@ import SectionHeading from './ui/section-heading';
 import TimelineItem from './ui/timeline-item';
 import { DownloadIcon, UserIcon, PhoneIcon, MailIcon, MapPinIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import profileImage from '@assets/FEBRI FOR CV OR OTHER PP - Copycopy.png';
 
 const AboutSection = () => {
   return (
@@ -25,9 +26,9 @@ const AboutSection = () => {
           >
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80" 
-                alt="Workspace" 
-                className="rounded-lg shadow-xl transform transition-transform duration-300 hover:scale-[1.02]"
+                src={profileImage} 
+                alt="Febri's Profile Photo" 
+                className="rounded-lg shadow-xl transform transition-transform duration-300 hover:scale-[1.02] w-full object-cover aspect-square"
               />
               <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-lg bg-gradient-to-r from-primary to-secondary p-0.5 shadow-lg">
                 <div className="w-full h-full rounded-lg bg-background flex items-center justify-center">
