@@ -64,9 +64,24 @@ const ColorPaletteGenerator = () => {
         headers: { 'Content-Type': 'application/json' }
       });
 
-      const data = await response.json();
+      // Check if response is OK
+      if (!response.ok) {
+        throw new Error(`Server responded with status: ${response.status}`);
+      }
+
+      // Get response text first to handle potential JSON parsing issues
+      const textData = await response.text();
       
-      if (data.success && data.colors) {
+      // Try to parse JSON
+      let data;
+      try {
+        data = JSON.parse(textData);
+      } catch (parseError) {
+        console.error('JSON parse error:', parseError);
+        throw new Error('Failed to parse server response as JSON');
+      }
+      
+      if (data.success && data.colors && Array.isArray(data.colors)) {
         // Create palette from colors
         const newPalette = data.colors.map((color: string) => ({ hex: color }));
         setPalette(newPalette);
@@ -74,7 +89,7 @@ const ColorPaletteGenerator = () => {
         throw new Error(data.message || 'Failed to generate palette');
       }
     } catch (err) {
-      console.error(err);
+      console.error('Palette generation error:', err);
       toast({
         title: "Generation failed",
         description: err instanceof Error ? err.message : "Something went wrong",
