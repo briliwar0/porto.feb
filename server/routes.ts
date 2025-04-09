@@ -5,6 +5,7 @@ import { insertMessageSchema } from "@shared/schema";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 import Stripe from "stripe";
+import { generateColorPalette } from "./openai";
 
 if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
@@ -59,6 +60,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ 
         success: false, 
         message: error instanceof Error ? error.message : "Failed to fetch GitHub repositories" 
+      });
+    }
+  });
+
+  // Color palette generator endpoint
+  app.post("/api/generate-palette", async (req, res) => {
+    try {
+      const { description, mood, numColors } = req.body;
+      
+      if (!description || !mood) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "Missing required parameters: description and mood" 
+        });
+      }
+
+      // Generate color palette using OpenAI
+      const colors = await generateColorPalette(
+        description, 
+        mood, 
+        numColors || 5
+      );
+
+      // Return the generated colors
+      res.json({ 
+        success: true, 
+        colors 
+      });
+    } catch (error: any) {
+      console.error("Error generating color palette:", error);
+      res.status(500).json({ 
+        success: false, 
+        message: "Error generating color palette: " + error.message 
       });
     }
   });

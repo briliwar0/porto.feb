@@ -5,6 +5,7 @@ import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import MarketplaceSection from '@/components/MarketplaceSection';
+import ColorPaletteGenerator from '@/components/ColorPaletteGenerator';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import Particles from '@/components/Particles';
@@ -47,6 +48,7 @@ const Home = () => {
         <SkillsSection />
         <ProjectsSection />
         <MarketplaceSection />
+        <ColorPaletteGenerator />
         <ContactSection />
       </main>
       <Footer />

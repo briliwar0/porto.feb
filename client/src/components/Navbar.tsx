@@ -103,6 +103,13 @@ const Navbar = () => {
               Marketplace
             </a>
             <a 
+              href="#color-generator" 
+              className="font-medium hover:text-primary transition-colors"
+              onClick={handleLinkClick}
+            >
+              Color Generator
+            </a>
+            <a 
               href="#contact" 
               className="font-medium hover:text-primary transition-colors"
               onClick={handleLinkClick}
@@ -159,6 +166,13 @@ const Navbar = () => {
                 onClick={handleLinkClick}
               >
                 Marketplace
+              </a>
+              <a 
+                href="#color-generator" 
+                className="font-medium hover:text-primary transition-colors py-2"
+                onClick={handleLinkClick}
+              >
+                Color Generator
               </a>
               <a 
                 href="#contact" 
