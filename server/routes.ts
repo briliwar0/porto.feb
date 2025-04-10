@@ -43,6 +43,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
     }
   });
+  
+  // Get all messages
+  app.get("/api/messages", async (req, res) => {
+    try {
+      const messages = await storage.getMessages();
+      res.json(messages);
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+      res.status(500).json({ 
+        success: false, 
+        message: "Failed to fetch messages" 
+      });
+    }
+  });
+  
+  // Get all users
+  app.get("/api/users", async (req, res) => {
+    try {
+      // This is a simplified endpoint - in a real app, you would add authorization
+      const users = await Promise.all(
+        Array.from({ length: 10 }).map(async (_, i) => {
+          try {
+            return await storage.getUser(i + 1);
+          } catch (e) {
+            return null;
+          }
+        })
+      ).then(results => results.filter(Boolean));
+      
+      res.json(users);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      res.status(500).json({ 
+        success: false, 
+        message: "Failed to fetch users" 
+      });
+    }
+  });
 
   // Get GitHub repositories - example of integrating with external APIs
   app.get("/api/github", async (req, res) => {
