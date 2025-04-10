@@ -1,8 +1,9 @@
 import { messages, type Message, type InsertMessage } from "@shared/schema";
 import { users, type User, type InsertUser } from "@shared/schema";
 import { visitors, type Visitor, type InsertVisitor } from "@shared/schema";
+import { pageVisits, type PageVisit, type InsertPageVisit } from "@shared/schema";
 import { db } from "./db";
-import { eq, and, desc, sql } from "drizzle-orm";
+import { eq, and, desc, sql, count, sum, avg } from "drizzle-orm";
 
 // Define storage interface with required CRUD methods
 export interface IStorage {
@@ -31,6 +32,20 @@ export interface IStorage {
     visitorsByOs: { os: string; count: number }[];
   }>;
   updateVisitor(id: number, visitor: Partial<InsertVisitor>): Promise<Visitor>;
+  
+  // Page Visit methods
+  createPageVisit(pageVisit: InsertPageVisit): Promise<PageVisit>;
+  getPageVisits(limit?: number, offset?: number): Promise<PageVisit[]>;
+  getPageVisitsByVisitor(visitorId: number): Promise<PageVisit[]>;
+  getPageVisitStats(): Promise<{
+    totalPageVisits: number;
+    uniquePageVisits: number;
+    mostVisitedPages: { path: string; count: number }[];
+    averageTimeOnPage: { path: string; avgTime: number }[];
+    entryPages: { path: string; count: number }[];
+    exitPages: { path: string; count: number }[];
+    bounceRate: number;
+  }>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -226,6 +241,137 @@ export class DatabaseStorage implements IStorage {
       visitorsByDevice,
       visitorsByBrowser,
       visitorsByOs
+    };
+  }
+  
+  // Page Visit methods implementation
+  async createPageVisit(insertPageVisit: InsertPageVisit): Promise<PageVisit> {
+    const [pageVisit] = await db
+      .insert(pageVisits)
+      .values(insertPageVisit)
+      .returning();
+    return pageVisit;
+  }
+  
+  async getPageVisits(limit: number = 100, offset: number = 0): Promise<PageVisit[]> {
+    return await db
+      .select()
+      .from(pageVisits)
+      .orderBy(desc(pageVisits.timestamp))
+      .limit(limit)
+      .offset(offset);
+  }
+  
+  async getPageVisitsByVisitor(visitorId: number): Promise<PageVisit[]> {
+    return await db
+      .select()
+      .from(pageVisits)
+      .where(eq(pageVisits.visitorId, visitorId))
+      .orderBy(desc(pageVisits.timestamp));
+  }
+  
+  async getPageVisitStats() {
+    // Get total page visits
+    const [totalPageVisitsResult] = await db
+      .select({ count: sql<number>`count(*)` })
+      .from(pageVisits);
+    const totalPageVisits = totalPageVisitsResult?.count || 0;
+    
+    // Get unique page visits (distinct paths)
+    const [uniquePageVisitsResult] = await db
+      .select({ count: sql<number>`count(distinct ${pageVisits.path})` })
+      .from(pageVisits);
+    const uniquePageVisits = uniquePageVisitsResult?.count || 0;
+    
+    // Get most visited pages
+    const mostVisitedPagesRaw = await db
+      .select({
+        path: pageVisits.path,
+        count: sql<number>`count(*)`
+      })
+      .from(pageVisits)
+      .groupBy(pageVisits.path)
+      .orderBy(desc(sql`count(*)`))
+      .limit(10);
+      
+    const mostVisitedPages = mostVisitedPagesRaw.map(item => ({
+      path: item.path,
+      count: item.count
+    }));
+    
+    // Get average time on page
+    const averageTimeOnPageRaw = await db
+      .select({
+        path: pageVisits.path,
+        avgTime: sql<number>`avg(${pageVisits.timeSpent})`
+      })
+      .from(pageVisits)
+      .where(sql`${pageVisits.timeSpent} IS NOT NULL`)
+      .groupBy(pageVisits.path)
+      .orderBy(desc(sql`avg(${pageVisits.timeSpent})`))
+      .limit(10);
+      
+    const averageTimeOnPage = averageTimeOnPageRaw.map(item => ({
+      path: item.path,
+      avgTime: Math.round(item.avgTime || 0)
+    }));
+    
+    // Get entry pages
+    const entryPagesRaw = await db
+      .select({
+        path: pageVisits.path,
+        count: sql<number>`count(*)`
+      })
+      .from(pageVisits)
+      .where(eq(pageVisits.entryPage, true))
+      .groupBy(pageVisits.path)
+      .orderBy(desc(sql`count(*)`))
+      .limit(10);
+      
+    const entryPages = entryPagesRaw.map(item => ({
+      path: item.path,
+      count: item.count
+    }));
+    
+    // Get exit pages
+    const exitPagesRaw = await db
+      .select({
+        path: pageVisits.path,
+        count: sql<number>`count(*)`
+      })
+      .from(pageVisits)
+      .where(eq(pageVisits.exitPage, true))
+      .groupBy(pageVisits.path)
+      .orderBy(desc(sql`count(*)`))
+      .limit(10);
+      
+    const exitPages = exitPagesRaw.map(item => ({
+      path: item.path,
+      count: item.count
+    }));
+    
+    // Calculate bounce rate (percentage of sessions with only one page visit)
+    const [bouncedSessionsResult] = await db
+      .select({ count: sql<number>`count(*)` })
+      .from(pageVisits)
+      .where(eq(pageVisits.bounced, true));
+    
+    const [totalSessionsResult] = await db
+      .select({ count: sql<number>`count(distinct ${pageVisits.visitorId})` })
+      .from(pageVisits);
+    
+    const bouncedSessions = bouncedSessionsResult?.count || 0;
+    const totalSessions = totalSessionsResult?.count || 0;
+    const bounceRate = totalSessions > 0 ? (bouncedSessions / totalSessions) * 100 : 0;
+    
+    return {
+      totalPageVisits,
+      uniquePageVisits,
+      mostVisitedPages,
+      averageTimeOnPage,
+      entryPages,
+      exitPages,
+      bounceRate: parseFloat(bounceRate.toFixed(2))
     };
   }
 }
