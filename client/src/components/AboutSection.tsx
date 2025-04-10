@@ -50,14 +50,10 @@ const AboutSection = () => {
               Full-Stack Developer based in {PERSONAL_INFO.location}
             </h3>
             <p className="text-lg mb-6 text-muted-foreground">
-              I'm a passionate full-stack developer with a keen eye for design and user experience. 
-              With over 5 years of professional experience, I specialize in creating responsive, 
-              accessible, and performant web applications that solve real-world problems.
+              I’m a passionate full-stack developer with a designer’s mindset, specializing in building responsive, accessible web applications that solve real-world problems. My journey began with studying Computer Science, where I discovered my love for hands-on development—though I ultimately chose to dive directly into the industry to pursue practical experience.
             </p>
             <p className="text-lg mb-8 text-muted-foreground">
-              My journey in tech began with a Computer Science degree, but my curiosity led me to 
-              explore UI/UX design, 3D modeling, and interactive digital experiences. I love working 
-              at the intersection of code and creativity.
+              Over the past 5+ years, I’ve honed my skills not just in code (React, Node.js, Python), but also in UI/UX design and interactive 3D experiences. I thrive where technology meets creativity, whether it’s optimizing backend performance or crafting pixel-perfect interfaces.
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">

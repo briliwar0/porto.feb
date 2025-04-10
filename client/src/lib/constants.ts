@@ -190,7 +190,7 @@ export const TIMELINE_ITEMS: TimelineItem[] = [
   {
     id: 1,
     title: 'Senior Full-Stack Developer',
-    organization: '@ Tech Innovations Inc.',
+    organization: '@ Febnas.tech.',
     period: '2021 - Present',
     description: 'Led a team of 5 developers to build and maintain a SaaS platform serving over 100,000 users. Implemented new features that increased user engagement by 35%.'
   },
