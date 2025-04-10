@@ -29,6 +29,8 @@ const DatabaseView = () => {
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [activeTab, setActiveTab] = useState('visitors');
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,18 +83,6 @@ const DatabaseView = () => {
     fetchData();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin" />
-        <span className="ml-2">Loading database data...</span>
-      </div>
-    );
-  }
-
-  const [, setLocation] = useLocation();
-  const { toast } = useToast();
-
   const handleLogout = () => {
     // Remove admin authentication
     sessionStorage.removeItem('adminAuth');
@@ -106,6 +96,15 @@ const DatabaseView = () => {
     // Redirect to home
     setLocation('/');
   };
+  
+  if (loading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin" />
+        <span className="ml-2">Loading database data...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
