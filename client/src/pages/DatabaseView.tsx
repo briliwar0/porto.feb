@@ -4,9 +4,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { apiRequest } from '@/lib/queryClient';
 import { Visitor } from '@shared/schema';
-import { Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Loader2, LogOut } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { useLocation } from 'wouter';
+import { useToast } from '@/hooks/use-toast';
 
 interface VisitorStats {
   totalVisitors: number;
@@ -87,11 +90,34 @@ const DatabaseView = () => {
     );
   }
 
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
+
+  const handleLogout = () => {
+    // Remove admin authentication
+    sessionStorage.removeItem('adminAuth');
+    
+    // Show success message
+    toast({
+      title: 'Logout berhasil',
+      description: 'Anda telah berhasil logout',
+    });
+    
+    // Redirect to home
+    setLocation('/');
+  };
+
   return (
     <div className="min-h-screen">
       <Navbar />
       <div className="container mx-auto px-4 py-10">
-        <h1 className="mb-8 text-3xl font-bold">Database Viewer</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Database Viewer</h1>
+          <Button variant="destructive" onClick={handleLogout} className="flex items-center gap-2">
+            <LogOut className="h-4 w-4" />
+            <span>Logout</span>
+          </Button>
+        </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="mb-4">
