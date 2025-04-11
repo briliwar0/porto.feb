@@ -264,7 +264,8 @@ app.use((req, res, next) => {
   next();
 });
 
-(async () => {
+// Fungsi untuk memulai server
+export async function startServer() {
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -284,15 +285,25 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 5000;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
-  });
-})();
+  return server;
+}
+
+// Hanya jalankan server jika tidak diimpor sebagai modul (untuk environment non-serverless)
+// Di Cloudflare Pages (serverless), kita menggunakan file functions/server.js
+if (require.main === module) {
+  (async () => {
+    const server = await startServer();
+    
+    // ALWAYS serve the app on port 5000
+    // this serves both the API and the client.
+    // It is the only port that is not firewalled.
+    const port = 5000;
+    server.listen({
+      port,
+      host: "0.0.0.0",
+      reusePort: true,
+    }, () => {
+      log(`serving on port ${port}`);
+    });
+  })();
+}

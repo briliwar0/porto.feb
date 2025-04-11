@@ -1,0 +1,151 @@
+2025-04-11T11:47:53.733Z	Initializing build environment...
+2025-04-11T11:48:36.349Z	Success: Finished initializing build environment
+2025-04-11T11:48:36.479Z	Cloning repository...
+2025-04-11T11:48:37.454Z	Detected the following tools from environment: npm@10.8.3, nodejs@22.9.0
+2025-04-11T11:48:37.455Z	Installing project dependencies: npm clean-install --progress=false
+2025-04-11T11:48:42.219Z	npm warn deprecated lodash.omit@4.5.0: This package is deprecated. Use destructuring assignment syntax instead.
+2025-04-11T11:48:42.327Z	npm warn deprecated lodash.pick@4.4.0: This package is deprecated. Use destructuring assignment syntax instead.
+2025-04-11T11:48:44.332Z	npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+2025-04-11T11:48:44.355Z	npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+2025-04-11T11:47:53.733Z	Initializing build environment...
+2025-04-11T11:48:36.349Z	Success: Finished initializing build environment
+2025-04-11T11:48:36.479Z	Cloning repository...
+2025-04-11T11:48:37.454Z	Detected the following tools from environment: npm@10.8.3, nodejs@22.9.0
+2025-04-11T11:48:37.455Z	Installing project dependencies: npm clean-install --progress=false
+2025-04-11T11:48:42.219Z	npm warn deprecated lodash.omit@4.5.0: This package is deprecated. Use destructuring assignment syntax instead.
+2025-04-11T11:48:42.327Z	npm warn deprecated lodash.pick@4.4.0: This package is deprecated. Use destructuring assignment syntax instead.
+2025-04-11T11:48:44.332Z	npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+2025-04-11T11:48:44.355Z	npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+2025-04-11T11:48:52.811Z	
+2025-04-11T11:48:52.811Z	added 597 packages, and audited 598 packages in 15s
+2025-04-11T11:48:52.812Z	
+2025-04-11T11:48:52.812Z	70 packages are looking for funding
+2025-04-11T11:48:52.815Z	  run `npm fund` for details
+2025-04-11T11:48:52.859Z	
+2025-04-11T11:48:52.860Z	10 vulnerabilities (8 moderate, 2 high)
+2025-04-11T11:48:52.860Z	
+2025-04-11T11:48:52.860Z	To address issues that do not require attention, run:
+2025-04-11T11:48:52.860Z	  npm audit fix
+2025-04-11T11:48:52.860Z	
+2025-04-11T11:48:52.860Z	To address all issues (including breaking changes), run:
+2025-04-11T11:48:52.860Z	  npm audit fix --force
+2025-04-11T11:48:52.861Z	
+2025-04-11T11:48:52.861Z	Run `npm audit` for details.
+2025-04-11T11:48:52.901Z	Executing user build command: npm run build
+2025-04-11T11:48:53.186Z	
+2025-04-11T11:48:53.187Z	> rest-express@1.0.0 build
+2025-04-11T11:48:53.187Z	> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-04-11T11:48:53.187Z	
+2025-04-11T11:48:53.648Z	vite v5.4.14 building for production...
+2025-04-11T11:48:53.739Z	transforming...
+2025-04-11T11:48:54.214Z	Browserslist: browsers data (caniuse-lite) is 6 months old. Please run:
+2025-04-11T11:48:54.216Z	  npx update-browserslist-db@latest
+2025-04-11T11:48:54.216Z	  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2025-04-11T11:49:04.564Z	✓ 3282 modules transformed.
+2025-04-11T11:49:05.760Z	rendering chunks...
+2025-04-11T11:49:05.786Z	computing gzip size...
+2025-04-11T11:49:05.833Z	../dist/public/index.html                                                               2.26 kB │ gzip:   0.97 kB
+2025-04-11T11:49:05.833Z	../dist/public/assets/FEBRI FOR CV OR OTHER PP - Coppoiuytty50percent-CENUnUAh.png    343.66 kB
+2025-04-11T11:49:05.833Z	../dist/public/assets/febri-profile-ydL2zmAR.png                                      358.25 kB
+2025-04-11T11:49:05.835Z	../dist/public/assets/index-D4dky3uC.css                                               83.86 kB │ gzip:  14.25 kB
+2025-04-11T11:49:05.835Z	../dist/public/assets/index-C82PLvaz.js                                             1,257.55 kB │ gzip: 366.29 kB
+2025-04-11T11:49:05.835Z	✓ built in 12.15s
+2025-04-11T11:49:05.836Z	
+2025-04-11T11:49:05.836Z	(!) Some chunks are larger than 500 kB after minification. Consider:
+2025-04-11T11:49:05.836Z	- Using dynamic import() to code-split the application
+2025-04-11T11:49:05.836Z	- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2025-04-11T11:49:05.837Z	- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+2025-04-11T11:49:05.928Z	
+2025-04-11T11:49:05.929Z	  dist/index.js  32.1kb
+2025-04-11T11:49:05.929Z	
+2025-04-11T11:49:05.929Z	⚡ Done in 8ms
+2025-04-11T11:49:05.944Z	Success: Build command completed
+2025-04-11T11:49:05.945Z	Executing user deploy command: npx wrangler deploy
+2025-04-11T11:49:07.424Z	npm warn exec The following package was not found and will be installed: wrangler@4.10.0
+2025-04-11T11:49:17.310Z	
+2025-04-11T11:49:17.311Z	 ⛅️ wrangler 4.10.0
+2025-04-11T11:49:17.312Z	-------------------
+2025-04-11T11:49:17.312Z	
+2025-04-11T11:49:17.318Z	Running custom build: npm run build && cp -r client/public/* dist/ && mkdir -p functions-build && esbuild functions/server.js --platform=node --packages=external --bundle --outfile=functions/server.js
+2025-04-11T11:49:17.545Z	
+2025-04-11T11:49:17.546Z	> rest-express@1.0.0 build
+2025-04-11T11:49:17.546Z	> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-04-11T11:49:17.554Z	
+2025-04-11T11:49:18.064Z	vite v5.4.14 building for production...
+2025-04-11T11:49:18.185Z	transforming...
+2025-04-11T11:49:18.653Z	Browserslist: browsers data (caniuse-lite) is 6 months old. Please run:
+2025-04-11T11:49:18.654Z	  npx update-browserslist-db@latest
+2025-04-11T11:49:18.654Z	  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2025-04-11T11:49:29.565Z	✓ 3282 modules transformed.
+2025-04-11T11:49:30.869Z	rendering chunks...
+2025-04-11T11:49:30.897Z	computing gzip size...
+2025-04-11T11:49:30.948Z	../dist/public/index.html                                                               2.26 kB │ gzip:   0.97 kB
+2025-04-11T11:49:30.948Z	../dist/public/assets/FEBRI FOR CV OR OTHER PP - Coppoiuytty50percent-CENUnUAh.png    343.66 kB
+2025-04-11T11:49:30.949Z	../dist/public/assets/febri-profile-ydL2zmAR.png                                      358.25 kB
+2025-04-11T11:49:30.949Z	../dist/public/assets/index-D4dky3uC.css                                               83.86 kB │ gzip:  14.25 kB
+2025-04-11T11:49:30.949Z	../dist/public/assets/index-C82PLvaz.js                                             1,257.55 kB │ gzip: 366.29 kB
+2025-04-11T11:49:30.949Z	
+2025-04-11T11:49:30.949Z	(!) Some chunks are larger than 500 kB after minification. Consider:
+2025-04-11T11:49:30.949Z	- Using dynamic import() to code-split the application
+2025-04-11T11:49:30.949Z	- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2025-04-11T11:49:30.949Z	- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+2025-04-11T11:49:30.949Z	✓ built in 12.84s
+2025-04-11T11:49:31.056Z	
+2025-04-11T11:49:31.057Z	  dist/index.js  32.1kb
+2025-04-11T11:49:31.057Z	
+2025-04-11T11:49:31.057Z	⚡ Done in 12ms
+2025-04-11T11:49:31.086Z	▲ [WARNING] "import.meta" is not available with the "cjs" output format and will be empty [empty-import-meta]
+2025-04-11T11:49:31.087Z	
+2025-04-11T11:49:31.087Z	    server/vite.ts:71:32:
+2025-04-11T11:49:31.087Z	      71 │   const distPath = path.resolve(import.meta.dirname, "public");
+2025-04-11T11:49:31.087Z	         ╵                                 ~~~~~~~~~~~
+2025-04-11T11:49:31.087Z	
+2025-04-11T11:49:31.087Z	  You need to set the output format to "esm" for "import.meta" to work correctly.
+2025-04-11T11:49:31.087Z	
+2025-04-11T11:49:31.091Z	✘ [ERROR] Top-level await is currently not supported with the "cjs" output format
+2025-04-11T11:49:31.092Z	
+2025-04-11T11:49:31.092Z	    vite.config.ts:15:10:
+2025-04-11T11:49:31.092Z	      15 │           await import("@replit/vite-plugin-cartographer").then((m...
+2025-04-11T11:49:31.092Z	         ╵           ~~~~~
+2025-04-11T11:49:31.092Z	
+2025-04-11T11:49:31.092Z	▲ [WARNING] "import.meta" is not available with the "cjs" output format and will be empty [empty-import-meta]
+2025-04-11T11:49:31.093Z	
+2025-04-11T11:49:31.093Z	    vite.config.ts:23:24:
+2025-04-11T11:49:31.093Z	      23 │       "@": path.resolve(import.meta.dirname, "client", "src"),
+2025-04-11T11:49:31.093Z	         ╵                         ~~~~~~~~~~~
+2025-04-11T11:49:31.093Z	
+2025-04-11T11:49:31.093Z	  You need to set the output format to "esm" for "import.meta" to work correctly.
+2025-04-11T11:49:31.093Z	
+2025-04-11T11:49:31.093Z	▲ [WARNING] "import.meta" is not available with the "cjs" output format and will be empty [empty-import-meta]
+2025-04-11T11:49:31.095Z	
+2025-04-11T11:49:31.095Z	    vite.config.ts:24:30:
+2025-04-11T11:49:31.095Z	      24 │       "@shared": path.resolve(import.meta.dirname, "shared"),
+2025-04-11T11:49:31.096Z	         ╵                               ~~~~~~~~~~~
+2025-04-11T11:49:31.096Z	
+2025-04-11T11:49:31.096Z	  You need to set the output format to "esm" for "import.meta" to work correctly.
+2025-04-11T11:49:31.096Z	
+2025-04-11T11:49:31.096Z	▲ [WARNING] "import.meta" is not available with the "cjs" output format and will be empty [empty-import-meta]
+2025-04-11T11:49:31.096Z	
+2025-04-11T11:49:31.097Z	    vite.config.ts:25:30:
+2025-04-11T11:49:31.097Z	      25 │ ...  "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+2025-04-11T11:49:31.097Z	         ╵                              ~~~~~~~~~~~
+2025-04-11T11:49:31.097Z	
+2025-04-11T11:49:31.097Z	  You need to set the output format to "esm" for "import.meta" to work correctly.
+2025-04-11T11:49:31.097Z	
+2025-04-11T11:49:31.098Z	▲ [WARNING] "import.meta" is not available with the "cjs" output format and will be empty [empty-import-meta]
+2025-04-11T11:49:31.098Z	
+2025-04-11T11:49:31.098Z	    vite.config.ts:28:21:
+2025-04-11T11:49:31.098Z	      28 │   root: path.resolve(import.meta.dirname, "client"),
+2025-04-11T11:49:31.098Z	         ╵                      ~~~~~~~~~~~
+2025-04-11T11:49:31.098Z	
+2025-04-11T11:49:31.098Z	  You need to set the output format to "esm" for "import.meta" to work correctly.
+2025-04-11T11:49:31.098Z	
+2025-04-11T11:49:31.098Z	5 of 6 warnings and 1 error shown (disable the message limit with --log-limit=0)
+2025-04-11T11:49:31.099Z	
+2025-04-11T11:49:31.172Z	✘ [ERROR] Running custom build `npm run build && cp -r client/public/* dist/ && mkdir -p functions-build && esbuild functions/server.js --platform=node --packages=external --bundle --outfile=functions/server.js` failed. There are likely more logs from your build command above.
+2025-04-11T11:49:31.176Z	
+2025-04-11T11:49:31.176Z	
+2025-04-11T11:49:31.176Z	
+2025-04-11T11:49:31.176Z	Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+2025-04-11T11:49:31.180Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2025-04-11_11-49-16_869.log"
+2025-04-11T11:49:31.245Z	Failed: error occurred while running deploy command
