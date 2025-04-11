@@ -10,8 +10,21 @@ import AutomaticUI from "@/components/AutomaticUI";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { Route, Switch } from "wouter";
 import NotFound from "@/pages/not-found";
+import { useEffect } from "react";
+import { initPageTracking, stopPageTracking } from "@/lib/pageTracker";
 
 function App() {
+  // Initialize page tracking on mount
+  useEffect(() => {
+    // Start tracking page visits
+    initPageTracking();
+    
+    // Clean up on unmount
+    return () => {
+      stopPageTracking();
+    };
+  }, []);
+  
   return (
     <>
       <CustomCursor />

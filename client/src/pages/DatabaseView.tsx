@@ -528,7 +528,7 @@ const DatabaseView = () => {
                             <TableCell className="truncate max-w-[150px]" title={visit.path}>
                               {visit.path}
                             </TableCell>
-                            <TableCell className="truncate max-w-[150px]" title={visit.title}>
+                            <TableCell className="truncate max-w-[150px]" title={typeof visit.title === 'string' ? visit.title : ''}>
                               {visit.title || 'N/A'}
                             </TableCell>
                             <TableCell>
