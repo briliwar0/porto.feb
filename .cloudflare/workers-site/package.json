@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "name": "porto-feb-cloudflare-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare worker untuk portfolio website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Febri",
+  "license": "MIT",
+  "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.3.0"
+  }
+}

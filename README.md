@@ -72,7 +72,21 @@ Untuk mengaktifkan API serverless di Cloudflare Pages:
 1. Di dashboard project Pages, pilih "Settings" > "Functions"
 2. Pastikan "Functions" diaktifkan
 3. Di bagian "Compatibility date", masukkan tanggal saat ini
-4. Klik "Save"
+4. Set "Node.js compatibility flag" ke enabled 
+5. Klik "Save"
+
+### Catatan File Khusus Cloudflare
+
+Repository ini sudah berisi beberapa file khusus untuk Cloudflare Pages:
+
+- `cloudflare.toml` - Konfigurasi utama untuk Cloudflare Pages
+- `wrangler.toml` - Konfigurasi untuk Cloudflare Workers
+- `functions/_routes.json` - Routing untuk serverless functions
+- `functions/_redirects` - Aturan pengalihan untuk SPA
+- `functions/_headers` - Header HTTP untuk keamanan
+- `client/public/_routes.json` - Routing khusus untuk aset statis
+- `client/public/_worker.js` - Worker khusus untuk SPA routing
+- `.cloudflare/workers-site/` - Konfigurasi tambahan untuk Workers
 
 ### Variabel Lingkungan
 
@@ -84,6 +98,30 @@ Tambahkan variabel lingkungan berikut di Cloudflare Pages:
    - `OPENAI_API_KEY`: API key OpenAI untuk generasi palet warna (opsional)
    - `STRIPE_SECRET_KEY`: API key Stripe untuk pemrosesan pembayaran (opsional)
 3. Klik "Save"
+
+### Setup Database untuk Cloudflare Pages
+
+Karena Cloudflare Pages hanya mengizinkan koneksi ke database melalui koneksi berenkripsi TLS/SSL yang valid, Anda perlu menggunakan layanan database cloud yang mendukung koneksi SSL seperti:
+
+1. **Neon** - [neon.tech](https://neon.tech) - PostgreSQL serverless database
+   - Mendukung koneksi edge dari Cloudflare Pages
+   - Menyediakan string koneksi yang kompatibel
+   - Ada tier gratis untuk penggunaan kecil
+
+2. **Supabase** - [supabase.com](https://supabase.com)
+   - Menyediakan PostgreSQL terkelola dengan koneksi SSL
+   - Mendukung koneksi edge dari Cloudflare Pages 
+
+3. **Vercel Postgres** - [vercel.com/storage/postgres](https://vercel.com/storage/postgres)
+   - Terintegrasi dengan Vercel tapi bisa dipakai di Cloudflare Pages
+   - Mendukung koneksi SSL/TLS
+
+Setelah membuat database di salah satu layanan tersebut, gunakan URL koneksi yang disediakan sebagai nilai `DATABASE_URL` di variabel lingkungan.
+
+**Catatan**: Pastikan URL koneksi menyertakan parameter SSL yang diperlukan, contoh:
+```
+postgresql://username:password@host:port/dbname?sslmode=require
+```
 
 ## Pengembangan Lokal
 
