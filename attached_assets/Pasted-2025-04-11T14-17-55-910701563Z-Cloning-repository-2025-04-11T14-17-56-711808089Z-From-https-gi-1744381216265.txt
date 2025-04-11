@@ -1,0 +1,34 @@
+2025-04-11T14:17:55.910701563Z	Cloning repository...
+2025-04-11T14:17:56.711808089Z	From https://github.com/briliwar0/porto.feb
+2025-04-11T14:17:56.712142971Z	 * branch            a85b24cc3f367ee755927198b8af026fd66fb11a -> FETCH_HEAD
+2025-04-11T14:17:56.712165915Z	
+2025-04-11T14:17:56.759043252Z	HEAD is now at a85b24c Pesan commit Anda yang menjelaskan perubahan
+2025-04-11T14:17:56.759290128Z	
+2025-04-11T14:17:56.838121304Z	
+2025-04-11T14:17:56.838517926Z	Using v2 root directory strategy
+2025-04-11T14:17:56.859377444Z	Success: Finished cloning repository files
+2025-04-11T14:17:58.596549872Z	Checking for configuration in a Wrangler configuration file (BETA)
+2025-04-11T14:17:58.597184312Z	
+2025-04-11T14:17:58.598605096Z	Found wrangler.toml file. Reading build configuration...
+2025-04-11T14:17:59.703100668Z	A wrangler.toml file was found but it does not appear to be valid. Did you mean to use wrangler.toml to configure Pages? If so, then make sure the file is valid and contains the `pages_build_output_dir` property. Skipping file and continuing.
+2025-04-11T14:17:59.703360923Z	No build command specified. Skipping build step.
+2025-04-11T14:17:59.704036775Z	Found Functions directory at /functions. Uploading.
+2025-04-11T14:17:59.710075449Z	 ⛅️ wrangler 3.101.0
+2025-04-11T14:17:59.7101417Z	-------------------
+2025-04-11T14:18:00.627228861Z	
+2025-04-11T14:18:00.725138137Z	[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mNo routes found when building Functions directory: /opt/buildhome/repo/functions[0m
+2025-04-11T14:18:00.725602822Z	
+2025-04-11T14:18:00.725815053Z	
+2025-04-11T14:18:00.798727761Z	🪵  Logs were written to "/root/.config/.wrangler/logs/wrangler-2025-04-11_14-18-00_319.log"
+2025-04-11T14:18:00.808148044Z	Warning: Wrangler did not find routes when building functions. Skipping.
+2025-04-11T14:18:00.808573541Z	Validating asset output directory
+2025-04-11T14:18:03.879079435Z	Deploying your site to Cloudflare's global network...
+2025-04-11T14:18:06.596715059Z	Uploading... (0/148)
+2025-04-11T14:18:07.615069541Z	Uploading... (49/148)
+2025-04-11T14:18:07.702437914Z	Uploading... (99/148)
+2025-04-11T14:18:07.822814383Z	Uploading... (148/148)
+2025-04-11T14:18:07.822848735Z	✨ Success! Uploaded 148 files (2.10 sec)
+2025-04-11T14:18:07.822854463Z	
+2025-04-11T14:18:08.423908934Z	✨ Upload complete!
+2025-04-11T14:18:11.810164Z	Success: Assets published!
+2025-04-11T14:18:13.485455Z	Success: Your site was deployed!
