@@ -1,0 +1,70 @@
+2025-04-11T11:42:37.274Z	Initializing build environment...
+2025-04-11T11:42:37.274Z	Initializing build environment...
+2025-04-11T11:42:43.758Z	Success: Finished initializing build environment
+2025-04-11T11:42:43.903Z	Cloning repository...
+2025-04-11T11:42:44.533Z	Detected the following tools from environment: npm@10.8.3, nodejs@22.9.0
+2025-04-11T11:42:44.535Z	Installing project dependencies: npm clean-install --progress=false
+2025-04-11T11:42:48.907Z	npm warn deprecated lodash.pick@4.4.0: This package is deprecated. Use destructuring assignment syntax instead.
+2025-04-11T11:42:48.909Z	npm warn deprecated lodash.omit@4.5.0: This package is deprecated. Use destructuring assignment syntax instead.
+2025-04-11T11:42:51.028Z	npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+2025-04-11T11:42:51.049Z	npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+2025-04-11T11:43:00.671Z	
+2025-04-11T11:43:00.672Z	added 597 packages, and audited 598 packages in 16s
+2025-04-11T11:43:00.672Z	
+2025-04-11T11:43:00.672Z	70 packages are looking for funding
+2025-04-11T11:43:00.672Z	  run `npm fund` for details
+2025-04-11T11:43:00.715Z	
+2025-04-11T11:43:00.715Z	10 vulnerabilities (8 moderate, 2 high)
+2025-04-11T11:43:00.716Z	
+2025-04-11T11:43:00.716Z	To address issues that do not require attention, run:
+2025-04-11T11:43:00.716Z	  npm audit fix
+2025-04-11T11:43:00.716Z	
+2025-04-11T11:43:00.716Z	To address all issues (including breaking changes), run:
+2025-04-11T11:43:00.716Z	  npm audit fix --force
+2025-04-11T11:43:00.717Z	
+2025-04-11T11:43:00.717Z	Run `npm audit` for details.
+2025-04-11T11:43:00.757Z	Executing user build command: npm run build
+2025-04-11T11:43:01.465Z	
+2025-04-11T11:43:01.466Z	> rest-express@1.0.0 build
+2025-04-11T11:43:01.466Z	> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-04-11T11:43:01.467Z	
+2025-04-11T11:43:01.935Z	vite v5.4.14 building for production...
+2025-04-11T11:43:02.046Z	transforming...
+2025-04-11T11:43:02.422Z	Browserslist: browsers data (caniuse-lite) is 6 months old. Please run:
+2025-04-11T11:43:02.422Z	  npx update-browserslist-db@latest
+2025-04-11T11:43:02.423Z	  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2025-04-11T11:43:12.015Z	✓ 3282 modules transformed.
+2025-04-11T11:43:13.231Z	rendering chunks...
+2025-04-11T11:43:13.256Z	computing gzip size...
+2025-04-11T11:43:13.303Z	../dist/public/index.html                                                               2.26 kB │ gzip:   0.97 kB
+2025-04-11T11:43:13.303Z	../dist/public/assets/FEBRI FOR CV OR OTHER PP - Coppoiuytty50percent-CENUnUAh.png    343.66 kB
+2025-04-11T11:43:13.303Z	../dist/public/assets/febri-profile-ydL2zmAR.png                                      358.25 kB
+2025-04-11T11:43:13.303Z	../dist/public/assets/index-D4dky3uC.css                                               83.86 kB │ gzip:  14.25 kB
+2025-04-11T11:43:13.304Z	../dist/public/assets/index-C82PLvaz.js                                             1,257.55 kB │ gzip: 366.29 kB
+2025-04-11T11:43:13.304Z	
+2025-04-11T11:43:13.304Z	(!) Some chunks are larger than 500 kB after minification. Consider:
+2025-04-11T11:43:13.305Z	- Using dynamic import() to code-split the application
+2025-04-11T11:43:13.305Z	- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2025-04-11T11:43:13.305Z	- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+2025-04-11T11:43:13.308Z	✓ built in 11.33s
+2025-04-11T11:43:13.406Z	
+2025-04-11T11:43:13.406Z	  dist/index.js  32.0kb
+2025-04-11T11:43:13.406Z	
+2025-04-11T11:43:13.406Z	⚡ Done in 7ms
+2025-04-11T11:43:13.418Z	Success: Build command completed
+2025-04-11T11:43:13.419Z	Executing user deploy command: npx wrangler deploy
+2025-04-11T11:43:14.743Z	npm warn exec The following package was not found and will be installed: wrangler@4.10.0
+2025-04-11T11:43:30.131Z	
+2025-04-11T11:43:30.131Z	 ⛅️ wrangler 4.10.0
+2025-04-11T11:43:30.131Z	-------------------
+2025-04-11T11:43:30.131Z	
+2025-04-11T11:43:30.138Z	Running custom build: ./build.sh
+2025-04-11T11:43:30.143Z	/bin/sh: 1: ./build.sh: Permission denied
+2025-04-11T11:43:30.146Z	
+2025-04-11T11:43:30.204Z	✘ [ERROR] Running custom build `./build.sh` failed. There are likely more logs from your build command above.
+2025-04-11T11:43:30.205Z	
+2025-04-11T11:43:30.205Z	
+2025-04-11T11:43:30.208Z	
+2025-04-11T11:43:30.209Z	Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+2025-04-11T11:43:30.209Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2025-04-11_11-43-29_701.log"
+2025-04-11T11:43:30.262Z	Failed: error occurred while running deploy command
