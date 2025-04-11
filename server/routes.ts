@@ -7,11 +7,13 @@ import { fromZodError } from "zod-validation-error";
 import Stripe from "stripe";
 import { generateColorPalette } from "./openai";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
+// Make Stripe optional
+let stripe: Stripe | null = null;
+if (process.env.STRIPE_SECRET_KEY) {
+  stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+} else {
+  console.warn('STRIPE_SECRET_KEY not provided. Stripe payment features will be disabled.');
 }
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form endpoint
@@ -138,6 +140,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Stripe payment intent endpoint
   app.post("/api/create-payment-intent", async (req, res) => {
     try {
+      // Check if Stripe is configured
+      if (!stripe) {
+        return res.status(503).json({
+          success: false,
+          message: "Stripe payment features are disabled. STRIPE_SECRET_KEY not provided."
+        });
+      }
+      
       const { amount, productId, productName } = req.body;
       
       if (!amount || !productId) {
@@ -147,8 +157,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Create a new payment intent
-      const paymentIntent = await stripe.paymentIntents.create({
+      // Create a new payment intent - we've already checked that stripe is not null
+      const paymentIntent = await (stripe as Stripe).paymentIntents.create({
         amount: Math.round(amount),
         currency: "usd",
         description: `Purchase of ${productName || 'Product #' + productId}`,

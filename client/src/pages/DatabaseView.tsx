@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Progress } from '@/components/ui/progress';
 import { apiRequest } from '@/lib/queryClient';
-import { Visitor } from '@shared/schema';
+import { Visitor, PageVisit } from '@shared/schema';
 import { Button } from '@/components/ui/button';
-import { Loader2, LogOut } from 'lucide-react';
+import { Loader2, LogOut, Clock, ArrowUpRightFromCircle, CornerLeftUp, CornerDownRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useLocation } from 'wouter';
@@ -22,9 +23,21 @@ interface VisitorStats {
   visitorsByOs: { os: string; count: number }[];
 }
 
+interface PageVisitStats {
+  totalPageVisits: number;
+  uniquePageVisits: number;
+  mostVisitedPages: { path: string; count: number }[];
+  averageTimeOnPage: { path: string; avgTime: number }[];
+  entryPages: { path: string; count: number }[];
+  exitPages: { path: string; count: number }[];
+  bounceRate: number;
+}
+
 const DatabaseView = () => {
   const [visitors, setVisitors] = useState<Visitor[]>([]);
   const [stats, setStats] = useState<VisitorStats | null>(null);
+  const [pageVisits, setPageVisits] = useState<PageVisit[]>([]);
+  const [pageVisitStats, setPageVisitStats] = useState<PageVisitStats | null>(null);
   const [messages, setMessages] = useState<any[]>([]);
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -48,6 +61,30 @@ const DatabaseView = () => {
         if (statsResponse.ok) {
           const statsData = await statsResponse.json();
           setStats(statsData);
+        }
+        
+        // Fetch page visits
+        try {
+          const pageVisitsResponse = await fetch('/api/pagevisits/list');
+          if (pageVisitsResponse.ok) {
+            const pageVisitsData = await pageVisitsResponse.json();
+            setPageVisits(pageVisitsData);
+          }
+        } catch (error) {
+          console.log('Page visits endpoint not available yet');
+          setPageVisits([]);
+        }
+        
+        // Fetch page visit stats
+        try {
+          const pageVisitStatsResponse = await fetch('/api/pagevisits');
+          if (pageVisitStatsResponse.ok) {
+            const pageVisitStatsData = await pageVisitStatsResponse.json();
+            setPageVisitStats(pageVisitStatsData);
+          }
+        } catch (error) {
+          console.log('Page visit stats endpoint not available yet');
+          setPageVisitStats(null);
         }
 
         // Fetch messages
@@ -122,6 +159,7 @@ const DatabaseView = () => {
           <TabsList className="mb-4">
             <TabsTrigger value="visitors">Visitors</TabsTrigger>
             <TabsTrigger value="stats">Stats</TabsTrigger>
+            <TabsTrigger value="pageVisits">Page Visits</TabsTrigger>
             <TabsTrigger value="messages">Messages</TabsTrigger>
             <TabsTrigger value="users">Users</TabsTrigger>
           </TabsList>
@@ -279,6 +317,233 @@ const DatabaseView = () => {
                       </Table>
                     </CardContent>
                   </Card>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="pageVisits">
+            <Card>
+              <CardHeader>
+                <CardTitle>Page Visit Statistics</CardTitle>
+                <CardDescription>Data and insights about how users navigate your website.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {!pageVisitStats ? (
+                  <div>No page visit statistics available</div>
+                ) : (
+                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    <Card>
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-sm font-medium">Total Page Visits</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-2xl font-bold">{pageVisitStats.totalPageVisits}</div>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-sm font-medium">Unique Page Visits</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-2xl font-bold">{pageVisitStats.uniquePageVisits}</div>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-sm font-medium">Bounce Rate</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-2xl font-bold">
+                          {(pageVisitStats.bounceRate * 100).toFixed(2)}%
+                        </div>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-sm font-medium">Pages / Visitor</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-2xl font-bold">
+                          {(pageVisitStats.totalPageVisits / (stats?.uniqueVisitors || 1)).toFixed(2)}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
+
+                <div className="mt-6 grid gap-6 md:grid-cols-2">
+                  <Card>
+                    <CardHeader className="flex flex-row items-center">
+                      <CardTitle className="text-sm font-medium mr-2">Most Visited Pages</CardTitle>
+                      <ArrowUpRightFromCircle className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      {pageVisitStats?.mostVisitedPages.length === 0 ? (
+                        <div className="text-center py-4">No data available</div>
+                      ) : (
+                        pageVisitStats?.mostVisitedPages.map((item, index) => (
+                          <div key={index} className="mb-4">
+                            <div className="flex justify-between text-sm mb-1">
+                              <span className="font-medium truncate max-w-[250px]" title={item.path}>
+                                {item.path}
+                              </span>
+                              <span>{item.count} views</span>
+                            </div>
+                            <Progress value={(item.count / Math.max(...pageVisitStats.mostVisitedPages.map(p => p.count))) * 100} />
+                          </div>
+                        ))
+                      )}
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader className="flex flex-row items-center">
+                      <CardTitle className="text-sm font-medium mr-2">Avg. Time on Page</CardTitle>
+                      <Clock className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      {pageVisitStats?.averageTimeOnPage.length === 0 ? (
+                        <div className="text-center py-4">No data available</div>
+                      ) : (
+                        pageVisitStats?.averageTimeOnPage.map((item, index) => (
+                          <div key={index} className="mb-4">
+                            <div className="flex justify-between text-sm mb-1">
+                              <span className="font-medium truncate max-w-[250px]" title={item.path}>
+                                {item.path}
+                              </span>
+                              <span>{Math.floor(item.avgTime / 60)}m {Math.floor(item.avgTime % 60)}s</span>
+                            </div>
+                            <Progress 
+                              value={(item.avgTime / Math.max(...pageVisitStats.averageTimeOnPage.map(p => p.avgTime))) * 100} 
+                              className="h-2"
+                            />
+                          </div>
+                        ))
+                      )}
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <div className="mt-6 grid gap-6 md:grid-cols-2">
+                  <Card>
+                    <CardHeader className="flex flex-row items-center">
+                      <CardTitle className="text-sm font-medium mr-2">Entry Pages</CardTitle>
+                      <CornerLeftUp className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Path</TableHead>
+                            <TableHead>Count</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {pageVisitStats?.entryPages.length === 0 ? (
+                            <TableRow>
+                              <TableCell colSpan={2} className="text-center">No data</TableCell>
+                            </TableRow>
+                          ) : (
+                            pageVisitStats?.entryPages.map((item, index) => (
+                              <TableRow key={index}>
+                                <TableCell className="truncate max-w-[250px]" title={item.path}>
+                                  {item.path}
+                                </TableCell>
+                                <TableCell>{item.count}</TableCell>
+                              </TableRow>
+                            ))
+                          )}
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader className="flex flex-row items-center">
+                      <CardTitle className="text-sm font-medium mr-2">Exit Pages</CardTitle>
+                      <CornerDownRight className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Path</TableHead>
+                            <TableHead>Count</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {pageVisitStats?.exitPages.length === 0 ? (
+                            <TableRow>
+                              <TableCell colSpan={2} className="text-center">No data</TableCell>
+                            </TableRow>
+                          ) : (
+                            pageVisitStats?.exitPages.map((item, index) => (
+                              <TableRow key={index}>
+                                <TableCell className="truncate max-w-[250px]" title={item.path}>
+                                  {item.path}
+                                </TableCell>
+                                <TableCell>{item.count}</TableCell>
+                              </TableRow>
+                            ))
+                          )}
+                        </TableBody>
+                      </Table>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="mt-6">
+              <CardHeader>
+                <CardTitle>Page Visit List</CardTitle>
+                <CardDescription>Detailed log of all page visits.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="rounded-md border">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>ID</TableHead>
+                        <TableHead>Visitor ID</TableHead>
+                        <TableHead>Path</TableHead>
+                        <TableHead>Title</TableHead>
+                        <TableHead>Time Spent</TableHead>
+                        <TableHead>Entry Page</TableHead>
+                        <TableHead>Exit Page</TableHead>
+                        <TableHead>Date</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {pageVisits.length === 0 ? (
+                        <TableRow>
+                          <TableCell colSpan={8} className="text-center">No page visits found</TableCell>
+                        </TableRow>
+                      ) : (
+                        pageVisits.map((visit) => (
+                          <TableRow key={visit.id}>
+                            <TableCell>{visit.id}</TableCell>
+                            <TableCell>{visit.visitorId}</TableCell>
+                            <TableCell className="truncate max-w-[150px]" title={visit.path}>
+                              {visit.path}
+                            </TableCell>
+                            <TableCell className="truncate max-w-[150px]" title={visit.title}>
+                              {visit.title || 'N/A'}
+                            </TableCell>
+                            <TableCell>
+                              {visit.timeSpent ? 
+                                `${Math.floor(visit.timeSpent / 60)}m ${visit.timeSpent % 60}s` : 
+                                'N/A'}
+                            </TableCell>
+                            <TableCell>{visit.entryPage ? 'Yes' : 'No'}</TableCell>
+                            <TableCell>{visit.exitPage ? 'Yes' : 'No'}</TableCell>
+                            <TableCell>{new Date(visit.timestamp).toLocaleString()}</TableCell>
+                          </TableRow>
+                        ))
+                      )}
+                    </TableBody>
+                  </Table>
                 </div>
               </CardContent>
             </Card>

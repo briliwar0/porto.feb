@@ -3,6 +3,13 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { storage } from "./storage";
 import { getClientIp } from "request-ip";
+import { initGeoIp, getGeoIpInfo, isPrivateIP } from "./geoip";
+import { db } from "./db";
+import { eq, and, desc } from "drizzle-orm";
+import { pageVisits } from "../shared/schema";
+
+// Initialize GeoIP database
+initGeoIp();
 
 const app = express();
 app.use(express.json());
@@ -29,6 +36,71 @@ app.get("/api/visitors/list", async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Error fetching visitors:", error);
     res.status(500).json({ error: "Failed to fetch visitor list" });
+  }
+});
+
+// API route for page visit statistics
+app.get("/api/pagevisits", async (req: Request, res: Response) => {
+  try {
+    const stats = await storage.getPageVisitStats();
+    res.json(stats);
+  } catch (error) {
+    console.error("Error fetching page visit stats:", error);
+    res.status(500).json({ error: "Failed to fetch page visit statistics" });
+  }
+});
+
+// API route for page visit list with pagination
+app.get("/api/pagevisits/list", async (req: Request, res: Response) => {
+  try {
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : 20;
+    const offset = req.query.offset ? parseInt(req.query.offset as string) : 0;
+    const visits = await storage.getPageVisits(limit, offset);
+    res.json(visits);
+  } catch (error) {
+    console.error("Error fetching page visits:", error);
+    res.status(500).json({ error: "Failed to fetch page visit list" });
+  }
+});
+
+// API route for updating page visit time spent
+app.post("/api/pagevisits/update-time", express.json(), async (req: Request, res: Response) => {
+  try {
+    const { timeSpent, path, visitorId } = req.body;
+    
+    if (!timeSpent || !path) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+    
+    // Find the most recent page visit for this visitor and path
+    const visits = await db
+      .select()
+      .from(pageVisits)
+      .where(
+        and(
+          eq(pageVisits.path, path),
+          visitorId ? eq(pageVisits.visitorId, visitorId) : undefined
+        )
+      )
+      .orderBy(desc(pageVisits.timestamp))
+      .limit(1);
+    
+    if (visits.length === 0) {
+      return res.status(404).json({ error: "Page visit not found" });
+    }
+    
+    const pageVisit = visits[0];
+    
+    // Update the time spent
+    await db
+      .update(pageVisits)
+      .set({ timeSpent: timeSpent })
+      .where(eq(pageVisits.id, pageVisit.id));
+    
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error("Error updating page visit time:", error);
+    res.status(500).json({ error: "Failed to update page visit time" });
   }
 });
 
@@ -70,22 +142,44 @@ app.use(async (req: Request, res: Response, next: NextFunction) => {
     if (userAgent.includes("Mobile")) device = "Mobile";
     else if (userAgent.includes("Tablet")) device = "Tablet";
     
+    // Get GeoIP data (if it's not a private IP)
+    let geoData = {
+      country: "Unknown",
+      city: "Unknown",
+      region: "Unknown",
+      latitude: "0",
+      longitude: "0"
+    };
+    
+    if (!isPrivateIP(ipAddress)) {
+      geoData = getGeoIpInfo(ipAddress);
+    }
+    
+    // Store visitor data
+    let visitorId: number;
+    
     // Check if visitor already exists
     const existingVisitor = await storage.getVisitorByIp(ipAddress);
     
     if (existingVisitor) {
       // Update existing visitor
-      await storage.updateVisitor(existingVisitor.id, {
+      const updatedVisitor = await storage.updateVisitor(existingVisitor.id, {
         userAgent: userAgent,
         referrer: req.headers.referer || "",
         language: req.headers["accept-language"] || "",
         browser: browser,
         os: os,
         device: device,
+        country: geoData.country,
+        city: geoData.city,
+        region: geoData.region,
+        latitude: geoData.latitude,
+        longitude: geoData.longitude
       });
+      visitorId = updatedVisitor.id;
     } else {
       // Create new visitor
-      await storage.createVisitor({
+      const newVisitor = await storage.createVisitor({
         ipAddress,
         userAgent: userAgent,
         referrer: req.headers.referer || "",
@@ -93,8 +187,38 @@ app.use(async (req: Request, res: Response, next: NextFunction) => {
         browser: browser,
         os: os,
         device: device,
+        country: geoData.country,
+        city: geoData.city,
+        region: geoData.region,
+        latitude: geoData.latitude,
+        longitude: geoData.longitude
       });
+      visitorId = newVisitor.id;
     }
+    
+    // Track page visit
+    // Get page title from query params (will be set by frontend JS)
+    const pageTitle = req.query.title as string || 'Unknown Page';
+    
+    // Determine if this is an entry page (first page in session)
+    // You would need session tracking for this; for now we'll use a simple approximation
+    const isEntryPage = !req.headers.referer || 
+                        !req.headers.referer.includes(req.headers.host || '');
+    
+    // Track the page visit
+    await storage.createPageVisit({
+      visitorId: visitorId,
+      path: req.path,
+      title: pageTitle,
+      referrer: req.headers.referer || '',
+      entryPage: isEntryPage,
+      // exitPage will be set later when session ends or on next page view
+      // timeSpent will be updated by frontend JS
+    });
+    
+    // Store visitor ID in request for later use
+    (req as any).visitorId = visitorId;
+    
   } catch (error) {
     // Just log the error and continue - visitor tracking should not block the application
     console.error("Error tracking visitor:", error);
