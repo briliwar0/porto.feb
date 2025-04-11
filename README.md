@@ -1,6 +1,6 @@
 # Portfolio Website - Febri
 
-Sebuah portfolio website modern dengan animasi interaktif, tema gelap/terang, dan backend database PostgreSQL.
+Sebuah portfolio website modern dengan animasi interaktif, tema gelap/terang, backend database PostgreSQL, dan sistem web analytics untuk pelacakan pengunjung yang komprehensif.
 
 ## Fitur
 
@@ -11,6 +11,10 @@ Sebuah portfolio website modern dengan animasi interaktif, tema gelap/terang, da
 - Bagian Portfolio yang dapat difilter
 - Formulir Kontak dengan validasi
 - Backend database PostgreSQL
+- Web Analytics dengan pelacakan pengunjung
+- GeoIP tracking untuk data lokasi pengunjung
+- Pelacakan waktu kunjungan halaman
+- Dashboard admin untuk visualisasi data pengunjung
 
 ## Teknologi
 
@@ -20,6 +24,9 @@ Sebuah portfolio website modern dengan animasi interaktif, tema gelap/terang, da
 - Express.js sebagai backend
 - PostgreSQL untuk database
 - Drizzle ORM
+- MaxMind GeoIP2 untuk deteksi lokasi pengunjung
+- React Query untuk fetching data
+- Recharts untuk visualisasi data analytics
 
 ## Deploy ke Netlify
 
@@ -37,14 +44,85 @@ Sebuah portfolio website modern dengan animasi interaktif, tema gelap/terang, da
 
 Tambahkan variabel lingkungan berikut di Netlify:
 
-- `DATABASE_URL`: URL database PostgreSQL Anda
+- `DATABASE_URL`: URL database PostgreSQL Anda (wajib)
+- `OPENAI_API_KEY`: API key OpenAI untuk generasi palet warna (opsional)
+- `STRIPE_SECRET_KEY`: API key Stripe untuk pemrosesan pembayaran (opsional)
 
 ## Pengembangan Lokal
 
 1. Clone repositori
 2. Instal dependensi: `npm install`
-3. Jalankan pengembangan lokal: `npm run dev`
+3. Siapkan file `.env` dengan variabel lingkungan yang diperlukan:
+   ```
+   DATABASE_URL=postgresql://username:password@localhost:5432/dbname
+   OPENAI_API_KEY=sk-your-api-key (opsional)
+   STRIPE_SECRET_KEY=sk_test_your-api-key (opsional)
+   ```
+4. Jalankan migrasi database: `npm run db:push`
+5. Jalankan pengembangan lokal: `npm run dev`
+
+### Migrasi Database
+
+Sistem ini menggunakan Drizzle ORM untuk pengelolaan database. Untuk memperbarui skema database:
+
+1. Edit definisi skema di `shared/schema.ts`
+2. Jalankan command: `npm run db:push`
+
+> **Catatan**: Command `db:push` akan langsung memperbarui struktur database tanpa membuat file migrasi terpisah. Harap berhati-hati jika ada data penting.
 
 ## Kustomisasi
 
 Data personal ada di `client/src/lib/constants.ts`.
+
+## Web Analytics & Statistik Pengunjung
+
+Website ini dilengkapi dengan sistem analytics terintegrasi yang melacak:
+
+- Jumlah total pengunjung dan pengunjung unik
+- Lokasi pengunjung berdasarkan negara menggunakan GeoIP
+- Informasi browser, sistem operasi, dan perangkat pengunjung
+- Halaman yang paling banyak dikunjungi
+- Rata-rata waktu yang dihabiskan di setiap halaman
+- Bounce rate (tingkat pentalan) keseluruhan situs
+- Halaman masuk (entry page) dan keluar (exit page) pengunjung
+
+Semua data analytics dapat dilihat di dashboard admin pada halaman `/admin` (memerlukan login).
+
+## API Opsional
+
+Website ini mendukung beberapa integrasi API opsional:
+
+- **OpenAI API**: Untuk fitur generasi palet warna. Tanpa API key, sistem akan menggunakan fallback ke palet warna predefined.
+- **Stripe API**: Untuk pemrosesan pembayaran. Tanpa API key, sistem tetap berfungsi tanpa fitur pembayaran.
+
+Untuk mengaktifkan API ini, tambahkan variabel lingkungan berikut:
+
+- `OPENAI_API_KEY`: Untuk integrasi dengan OpenAI
+- `STRIPE_SECRET_KEY`: Untuk integrasi dengan Stripe
+
+## Analytics API
+
+Website ini menyediakan API endpoints untuk mengakses data analytics:
+
+### Visitor Analytics
+
+- `GET /api/visitors` - Mendapatkan statistik pengunjung (total, unik, per negara, dll)
+- `GET /api/visitors/list` - Mendapatkan daftar pengunjung dengan detail
+
+### Page Visit Analytics
+
+- `GET /api/pagevisits` - Mendapatkan statistik kunjungan halaman (halaman populer, bounce rate, dll)
+- `GET /api/pagevisits/list` - Mendapatkan daftar kunjungan halaman dengan detail
+- `POST /api/pagevisits/update-time` - Memperbarui waktu yang dihabiskan pada halaman tertentu
+
+Data yang dikirim dari API ini dapat digunakan untuk membuat visualisasi custom atau diintegrasikan dengan sistem analytics pihak ketiga.
+
+## Privasi Data
+
+Sistem analytics ini dirancang dengan memperhatikan privasi pengguna:
+
+- Tidak menggunakan cookies untuk pelacakan
+- Hanya mengumpulkan informasi teknis (browser, OS, lokasi negara)
+- Tidak melakukan cross-site tracking
+- Tidak mengumpulkan informasi pribadi pengguna (nama, email, dll) kecuali pengguna mengisi form kontak
+- Data analitik hanya tersedia bagi administrator situs
