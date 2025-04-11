@@ -8,10 +8,17 @@ import { db } from "./db";
 import { eq, and, desc } from "drizzle-orm";
 import { pageVisits } from "../shared/schema";
 
-// Initialize GeoIP database
-initGeoIp();
+// Export untuk serverless function
+export function initDb() {
+  // Initialize GeoIP database
+  initGeoIp();
+  log("Database initialized");
+}
 
-const app = express();
+// Initialize di sini untuk server development
+initDb();
+
+export const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
