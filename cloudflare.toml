@@ -1,5 +1,5 @@
 [build]
-command = "npm run build && cp -r client/public/* dist/ && mkdir -p functions-build && esbuild functions/server.js --platform=node --packages=external --bundle --format=esm --outfile=functions/server.js"
+command = "npm run build && cp -r client/public/* dist/ && mkdir -p functions-build && esbuild functions/server.js --platform=node --packages=external --bundle --format=esm --outfile=functions/server.js --allow-overwrite"
 publish = "dist"
 node_bundler = "esbuild"
 
