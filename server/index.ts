@@ -288,9 +288,10 @@ export async function startServer() {
   return server;
 }
 
-// Hanya jalankan server jika tidak diimpor sebagai modul (untuk environment non-serverless)
+// Hanya jalankan server jika dijalankan sebagai skrip utama (untuk environment non-serverless)
 // Di Cloudflare Pages (serverless), kita menggunakan file functions/server.js
-if (require.main === module) {
+// ES modules don't have require.main === module equivalent, so we check import.meta.url
+if (import.meta.url === `file://${process.argv[1]}`) {
   (async () => {
     const server = await startServer();
     
