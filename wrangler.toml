@@ -1,0 +1,14 @@
+name = "porto-feb-api"
+compatibility_date = "2023-12-01"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+main = "./functions/server.js"
+
+[build]
+command = "./build.sh"
+
+[site]
+bucket = "./dist"
+
+[vars]
+NODE_ENV = "production"

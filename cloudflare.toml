@@ -1,0 +1,17 @@
+[build]
+command = "./build.sh"
+publish = "dist"
+node_bundler = "esbuild"
+
+[build.environment]
+NODE_VERSION = "20"
+
+[functions]
+directory = "functions"
+
+[routes]
+pattern = "/api/*"
+function = "server"
+
+[site]
+bucket = "./dist"

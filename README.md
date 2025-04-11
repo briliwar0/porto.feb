@@ -48,6 +48,43 @@ Tambahkan variabel lingkungan berikut di Netlify:
 - `OPENAI_API_KEY`: API key OpenAI untuk generasi palet warna (opsional)
 - `STRIPE_SECRET_KEY`: API key Stripe untuk pemrosesan pembayaran (opsional)
 
+## Deploy ke Cloudflare Pages
+
+### Menggunakan GitHub
+
+1. Push kode ke repositori GitHub Anda
+2. Login ke dashboard Cloudflare
+3. Pilih "Pages" dari menu utama
+4. Klik "Create a project" dan pilih "Connect to Git"
+5. Pilih repositori GitHub Anda
+6. Konfigurasi pengaturan build:
+   - Framework preset: None
+   - Build command: `./build.sh`
+   - Build output directory: `dist`
+   - Root directory: `/` (root direktori project)
+   - Node.js version: 20 (atau versi terbaru yang didukung)
+7. Klik "Save and Deploy"
+
+### Konfigurasi Functions
+
+Untuk mengaktifkan API serverless di Cloudflare Pages:
+
+1. Di dashboard project Pages, pilih "Settings" > "Functions"
+2. Pastikan "Functions" diaktifkan
+3. Di bagian "Compatibility date", masukkan tanggal saat ini
+4. Klik "Save"
+
+### Variabel Lingkungan
+
+Tambahkan variabel lingkungan berikut di Cloudflare Pages:
+
+1. Di dashboard project Pages, pilih "Settings" > "Environment variables"
+2. Tambahkan variabel yang sama seperti di Netlify:
+   - `DATABASE_URL`: URL database PostgreSQL Anda (wajib)
+   - `OPENAI_API_KEY`: API key OpenAI untuk generasi palet warna (opsional)
+   - `STRIPE_SECRET_KEY`: API key Stripe untuk pemrosesan pembayaran (opsional)
+3. Klik "Save"
+
 ## Pengembangan Lokal
 
 1. Clone repositori
