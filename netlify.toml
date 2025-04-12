@@ -1,23 +1,35 @@
+# Konfigurasi Build Netlify
 [build]
-  command = "npm run build && mkdir -p functions-build && cp -r client/public/* dist/public/ && esbuild functions/server.js --platform=node --packages=external --bundle --outfile=functions-build/server.js --allow-overwrite && cp functions-build/server.js functions/server.js && cp client/public/netlify.toml dist/public/"
-  publish = "dist/public"
+  command = "npm run build && mkdir -p functions-build && cp -r client/public/* dist/ && esbuild functions/server.js --platform=node --packages=external --bundle --outfile=functions-build/server.js --allow-overwrite && cp functions-build/server.js functions/server.js"
+  publish = "dist"
   functions = "functions"
 
+# Konfigurasi Development
 [dev]
   command = "npm run dev"
   port = 5000
   targetPort = 5000
+  framework = "#custom"
 
+# Aturan pengalihan API ke fungsi serverless
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/server/:splat"
   status = 200
+  force = true
 
+# Aturan pengalihan untuk SPA (Single Page Application)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
   force = true
 
+# Variabel Lingkungan
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
+
+# Pengaturan fungsi serverless
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["express"]

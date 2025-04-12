@@ -1,14 +1,19 @@
 name = "porto-feb-api"
-compatibility_date = "2023-12-01"
+compatibility_date = "2024-04-12"
 compatibility_flags = ["nodejs_compat"]
 workers_dev = true
 main = "./functions/server.js"
 
 [build]
-command = "npm run build && cp -r client/public/* dist/ && mkdir -p functions-build && esbuild functions/server.js --platform=node --packages=external --bundle --format=esm --outfile=functions/server.js"
+command = "npm run build && cp -r client/public/* dist/ && mkdir -p functions-build && esbuild functions/server.js --platform=node --packages=external --bundle --format=esm --outfile=functions/server.js --allow-overwrite"
 
 [site]
 bucket = "./dist"
+
+# Route untuk API
+[[routes]]
+pattern = "/api/*"
+script = "server"
 
 [vars]
 NODE_ENV = "production"

@@ -1,3 +1,4 @@
+# Konfigurasi Cloudflare Pages
 [build]
 command = "npm run build && cp -r client/public/* dist/ && mkdir -p functions-build && esbuild functions/server.js --platform=node --packages=external --bundle --format=esm --outfile=functions/server.js --allow-overwrite"
 publish = "dist"
@@ -6,12 +7,28 @@ node_bundler = "esbuild"
 [build.environment]
 NODE_VERSION = "20"
 
+# Konfigurasi Functions
 [functions]
 directory = "functions"
+node_compat = true
 
-[routes]
+# Route untuk API
+[[routes]]
 pattern = "/api/*"
 function = "server"
 
+# Route untuk SPA
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
 [site]
 bucket = "./dist"
+
+# Environment variables
+[vars]
+NODE_ENV = "production"
+
+[pages_build_output_dir]
+value = "dist"
