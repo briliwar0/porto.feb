@@ -4,7 +4,7 @@ import { Project, Skill, TimelineItem, SocialLink, MarketplaceItem } from './typ
 export const SOCIAL_LINKS: SocialLink[] = [
   { 
     platform: 'GitHub', 
-    url: 'https://github.com/febriliantisna', 
+    url: 'https://github.com/briliwar0', 
     icon: 'github' 
   },
   { 
@@ -228,7 +228,7 @@ export const PERSONAL_INFO = {
   title: 'Full Stack Developer & UI/UX Enthusiast',
   location: 'East Kalimantan, Indonesia',
   email: 'febriliantisna@gmail.com',
-  phone: '+6281255697781'
+  phone: '+6285165396505'
 };
 
 // Typing effect phrases
